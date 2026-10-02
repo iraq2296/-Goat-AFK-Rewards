@@ -5,6 +5,14 @@
 
 const fs = require('fs');
 const path = require('path');
+
+// Automatically start Discord Bot & Subscription Web Server
+try {
+  require('./discord_bot.js');
+} catch (e) {
+  console.error('[Discord Bot Launch Error]:', e.message);
+}
+
 const mineflayer = require('mineflayer');
 
 // Load config
@@ -319,5 +327,10 @@ function checkChestDeposit() {
   }
 }
 
-// Start
-startBot();
+// Start Minecraft bot only if a valid server is configured
+if (serverHost === 'play.example-server.net' || serverHost === 'play.example.com') {
+  console.log('💡 بوت ماينكرافت ينتظر وضع آيبي سيرفرك الحقيقي في config.json للاتصال به.');
+  console.log('🌐 خادم موقع الاشتراكات وبوت الديسكورد يعملان الآن في الخلفية.');
+} else {
+  startBot();
+}
