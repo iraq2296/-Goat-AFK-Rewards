@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7410 3900" width="22" height="15" style="border-radius: 3px; display: inline-block; vertical-align: middle; box-shadow: 0 0 2px rgba(0,0,0,0.5);">
+  <rect width="7410" height="3900" fill="#b22234"/>
+  <path d="M0,450H7410M0,1050H7410M0,1650H7410M0,2250H7410M0,2850H7410M0,3450H7410" stroke="#fff" stroke-width="300"/>
+  <rect width="2964" height="2100" fill="#3c3b6e"/>
+  <g fill="#fff">
+    <circle cx="500" cy="400" r="100"/>
+    <circle cx="1000" cy="400" r="100"/>
+    <circle cx="1500" cy="400" r="100"/>
+    <circle cx="2000" cy="400" r="100"/>
+    <circle cx="2500" cy="400" r="100"/>
+    <circle cx="750" cy="750" r="100"/>
+    <circle cx="1250" cy="750" r="100"/>
+    <circle cx="1750" cy="750" r="100"/>
+    <circle cx="2250" cy="750" r="100"/>
+    <circle cx="500" cy="1100" r="100"/>
+    <circle cx="1000" cy="1100" r="100"/>
+    <circle cx="1500" cy="1100" r="100"/>
+    <circle cx="2000" cy="1100" r="100"/>
+    <circle cx="2500" cy="1100" r="100"/>
+    <circle cx="750" cy="1450" r="100"/>
+    <circle cx="1250" cy="1450" r="100"/>
+    <circle cx="1750" cy="1450" r="100"/>
+    <circle cx="2250" cy="1450" r="100"/>
+    <circle cx="500" cy="1800" r="100"/>
+    <circle cx="1000" cy="1800" r="100"/>
+    <circle cx="1500" cy="1800" r="100"/>
+    <circle cx="2000" cy="1800" r="100"/>
+    <circle cx="2500" cy="1800" r="100"/>
+  </g>
+</svg>

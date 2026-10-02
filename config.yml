@@ -1,0 +1,48 @@
+# ===================================================
+# Minecraft AFK Rewards Plugin Configuration
+# Compatible with Paper / Purpur / Spigot 1.20.x
+# ===================================================
+
+settings:
+  check-interval-seconds: 1
+  safe-zone:
+    world: "world"
+    pos1: { x: 120, y: 64, z: -345 }
+    pos2: { x: 128, y: 72, z: -335 }
+  anti-kick:
+    bypass-permission: "afkrewards.bypass"
+    simulate-packet-motion: true
+
+discord-webhook:
+  enabled: true
+  url: "https://discord.com/api/webhooks/YOUR_WEBHOOK"
+  username: "AFK System"
+  avatar: "https://example.com/steve.png"
+
+rewards-tiers:
+  bronze:
+    required-minutes: 15
+    commands:
+      - "give %player% iron_ingot 16"
+      - "xp add %player% 500 points"
+  silver:
+    required-minutes: 45
+    commands:
+      - "give %player% gold_ingot 8"
+      - "give %player% diamond 3"
+      - "give %player% enchanted_book{StoredEnchantments:[{id:\"minecraft:unbreaking\",lvl:3s}]}"
+  gold:
+    required-minutes: 90
+    commands:
+      - "give %player% diamond 8"
+      - "give %player% golden_apple 2"
+  diamond:
+    required-minutes: 180
+    commands:
+      - "give %player% ancient_debris 1"
+      - "give %player% enchanted_book{StoredEnchantments:[{id:\"minecraft:mending\",lvl:1s}]}"
+  netherite:
+    required-minutes: 360
+    commands:
+      - "give %player% netherite_ingot 1"
+      - "lp user %player% parent addtemp afklegend 7d"

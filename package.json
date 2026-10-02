@@ -1,0 +1,15 @@
+{
+  "name": "minecraft-afk-discord-system",
+  "version": "2.5.0",
+  "description": "24/7 Minecraft AFK Rewards System with Mineflayer and Discord Bot Integration",
+  "main": "bot.js",
+  "scripts": {
+    "start:mc": "node bot.js",
+    "start:discord": "node discord_bot.js"
+  },
+  "dependencies": {
+    "mineflayer": "^4.20.1",
+    "mineflayer-pathfinder": "^2.4.5",
+    "discord.js": "^14.14.1"
+  }
+}

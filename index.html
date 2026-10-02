@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goat AFK Rewards | نظام الفرم والخمول الذاتي لماينكرافت</title>
+  <meta name="description" content="بوت الفرم والخمول الذاتي في ماينكرافت 24/7 مع حماية كاملة من الطرد ونظام مكافآت ورتب ديسكورد">
+
+  <!-- Google Fonts: Cairo, Outfit, Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=2.6.2">
+</head>
+
+<body>
+
+  <!-- Ambient Blurred Background Wallpaper -->
+  <div class="bg-wallpaper"></div>
+  <div class="bg-overlay"></div>
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-badge" title="Goat AFK Rewards">
+          <img src="goat_avatar.png" alt="Goat AFK Logo">
+        </div>
+        <div>
+          <div class="brand-title">Goat <span>AFK Rewards</span></div>
+          <div class="brand-sub" data-i18n="brand_sub">نظام الفرم والخمول الذاتي لماينكرافت v2.5</div>
+        </div>
+      </div>
+
+      <!-- Quick Navigation Links -->
+      <nav style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <button class="btn btn-outline" style="padding: 8px 14px; font-size: 0.85rem;" onclick="scrollToSection('pricing-plans')" data-i18n="nav_plans">
+          <i class="fas fa-gem text-gold"></i> باقات الاشتراك
+        </button>
+        <button class="btn btn-outline" style="padding: 8px 14px; font-size: 0.85rem;" onclick="scrollToSection('how-to-activate')" data-i18n="nav_commands">
+          <i class="fab fa-discord text-discord"></i> التفعيل بالديسكورد
+        </button>
+        <button class="btn btn-outline" style="padding: 8px 14px; font-size: 0.85rem;" onclick="scrollToSection('system-features')" data-i18n="nav_features">
+          <i class="fas fa-shield-halved text-cyan"></i> ميزات النظام
+        </button>
+        <button class="btn btn-outline" style="padding: 8px 14px; font-size: 0.85rem;" onclick="scrollToSection('reward-tiers')" data-i18n="nav_rewards">
+          <i class="fas fa-trophy text-gold"></i> مكافآت الخمول
+        </button>
+      </nav>
+
+      <div class="header-status-group">
+        <!-- Language Switcher Pill -->
+        <div class="lang-switcher-wrap" id="langSwitcherWrap">
+          <button class="lang-toggle-btn active" id="langBtnAr" onclick="setLanguage('ar')" title="اللغة العربية" data-i18n-title="lang_btn_ar_title">
+            <img src="flag_iq.svg" alt="العراق" class="lang-flag-img"> <span class="lang-text" data-i18n="lang_btn_ar">العربية</span>
+          </button>
+          <button class="lang-toggle-btn" id="langBtnEn" onclick="setLanguage('en')" title="English" data-i18n-title="lang_btn_en_title">
+            <img src="flag_us.svg" alt="English" class="lang-flag-img"> <span class="lang-text" data-i18n="lang_btn_en">EN</span>
+          </button>
+        </div>
+
+        <div class="status-pill discord-status">
+          <span class="pulse-dot green"></span>
+          <i class="fab fa-discord text-discord"></i>
+          <span data-i18n="discord_status_text">بوت الديسكورد: <strong>متصل 24/7</strong></span>
+        </div>
+        <button class="sound-toggle-btn" id="soundToggleBtn" title="كتم/تشغيل مؤثرات ماينكرافت" data-i18n-title="sound_toggle_title">
+          <i class="fas fa-volume-high"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- Hero Showcase Strip -->
+    <section class="hero-strip" style="margin-top: 24px;">
+      <div class="hero-content">
+        <div class="hero-tag" data-i18n="hero_tag">
+          <i class="fas fa-crown text-gold"></i> نظام الفرم وحماية الحساب الذاتي 24/7
+        </div>
+        <h1 data-i18n="hero_title">بوت الفرم والخمول الذاتي في ماينكرافت</h1>
+        <p data-i18n="hero_desc">
+          دعه يفرّم لك في أي سيرفر 24/7 وأنت نائم أو خارج اللعبة، واجمع النيثرايت والألماس والمكافآت الأسطورية مع حماية كاملة من الطرد (Anti-AFK) وإشعارات خاصة مباشرة على ديسكورد!
+        </p>
+
+        <div class="hero-stats-row">
+          <div class="h-stat">
+            <span class="h-stat-num text-cyan">100%</span>
+            <span class="h-stat-label" data-i18n="hero_stat_antiafk">حماية ضد الطرد Anti-AFK</span>
+          </div>
+          <div class="h-stat">
+            <span class="h-stat-num text-gold">24/7</span>
+            <span class="h-stat-label" data-i18n="hero_stat_farming">فرم مستمر دون توقف</span>
+          </div>
+          <div class="h-stat">
+            <span class="h-stat-num text-success">1,480+</span>
+            <span class="h-stat-label" data-i18n="hero_stat_items">عنصر نادر تم فرزه وتخزينه</span>
+          </div>
+          <div class="h-stat">
+            <span class="h-stat-num text-discord" data-i18n="hero_stat_instant_val">فوري 📩</span>
+            <span class="h-stat-label" data-i18n="hero_stat_dms">إشعارات الخاص بالديسكورد</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap;">
+          <button class="btn btn-primary" style="padding: 12px 24px; font-size: 1rem;" onclick="scrollToSection('how-to-activate')" data-i18n="hero_btn_activate">
+            <i class="fab fa-discord"></i> تفعيل البوت عبر الديسكورد
+          </button>
+          <button class="btn btn-outline" style="padding: 12px 24px; font-size: 1rem;" onclick="scrollToSection('pricing-plans')" data-i18n="hero_btn_plans">
+            <i class="fas fa-gem text-gold"></i> استعراض الباقات والأسعار
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-render-preview">
+        <img src="hero.jpg" alt="Minecraft AFK System Render" class="render-thumb" id="renderHeroImg">
+        <div class="render-live-tag" data-i18n="hero_render_tag">
+          <i class="fas fa-shield-halved text-cyan"></i> منطقة الأمان (Safe Zone) • حماية 24/7
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: SUBSCRIPTION PLANS -->
+    <section class="portal-section" id="pricing-plans">
+      <div class="section-head">
+        <div class="section-tag" data-i18n="plans_badge"><i class="fas fa-crown text-gold"></i> خطط وباقات المشتركين</div>
+        <h2 class="section-title" data-i18n="plans_title">باقات وأسعار الاشتراك في بوت الفرم الذكي</h2>
+        <p class="section-sub" data-i18n="plans_sub">
+          اختر الباقة المناسبة لاحتياجاتك، وتفعيل البوت يتم فوراً وبشكل ذاتي عن طريق أمر الديسكورد دون الحاجة لانتظار أحد!
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Plan 1: Bronze Trial (24 Hours - $5) -->
+        <div class="price-card tier-bronze" id="cardPlanBronze">
+          <div>
+            <div class="p-badge" data-i18n="plan_bronze_badge"><i class="fas fa-clock text-amber"></i> باقة التجربة اليومية</div>
+            <div class="p-title" data-i18n="plan_bronze_title">باقة التجربة (24 ساعة)</div>
+            <div class="p-price text-bronze" data-i18n="plan_bronze_price">$5 <span>/ 24 ساعة (يوم كامل)</span></div>
+            <div class="tier-support-pill pill-bronze" data-i18n="plan_bronze_pill">
+              <i class="fas fa-medal"></i>
+              <span>تدعم رتبة: المستوى البرونزي فقط</span>
+            </div>
+            <ul class="p-features">
+              <li data-i18n="plan_bronze_f1"><i class="fas fa-check text-green"></i> <strong>مدة الباقة:</strong> 24 ساعة كاملة (يوم كامل) فرم مستمر</li>
+              <li data-i18n="plan_bronze_f2"><i class="fas fa-check text-green"></i> <strong>رتب الخمول:</strong> تدعم مكافآت المستوى البرونزي فقط</li>
+              <li data-i18n="plan_bronze_f3"><i class="fas fa-check text-green"></i> حماية Anti-AFK ذكية ومتطورة ضد الطرد من السيرفر</li>
+              <li data-i18n="plan_bronze_f4"><i class="fas fa-check text-green"></i> ضرب وقتل الموبات والوحوش بالسيف (Auto Attack)</li>
+              <li data-i18n="plan_bronze_f5"><i class="fas fa-check text-green"></i> يدخل أي سيرفر (سيرفرات مكركة أو أصلية)</li>
+              <li data-i18n="plan_bronze_f6"><i class="fas fa-check text-green"></i> إشعار تفعيل وبدء خمول فوري في خاص الديسكورد (DM)</li>
+            </ul>
+          </div>
+          <div class="price-card-actions">
+            <button class="btn-plan-buy-now btn-buy-bronze" onclick="openPurchaseModal('bronze')" data-i18n="plan_bronze_btn">
+              <i class="fas fa-bolt"></i> شراء الباقة واستلام الكود بالخاص 📩
+            </button>
+          </div>
+        </div>
+
+        <!-- Plan 2: Diamond Monthly (30 Days - $15) (Featured) -->
+        <div class="price-card tier-diamond featured" id="cardPlanDiamond">
+          <div class="p-popular-tag" data-i18n="plan_popular_tag">الأكثر طلباً 🔥</div>
+          <div>
+            <div class="p-badge" data-i18n="plan_diamond_badge"><i class="fas fa-gem text-cyan"></i> الباقة الماسية الشهرية</div>
+            <div class="p-title" data-i18n="plan_diamond_title">الباقة الماسية (شهر كامل)</div>
+            <div class="p-price text-cyan" data-i18n="plan_diamond_price">$15 <span>/ شهر كامل (30 يوم)</span></div>
+            <div class="tier-support-pill pill-diamond" data-i18n="plan_diamond_pill">
+              <i class="fas fa-gem"></i>
+              <span>تدعم رتب: برونزي + فضي + ذهبي</span>
+            </div>
+            <ul class="p-features">
+              <li data-i18n="plan_diamond_f1"><i class="fas fa-check text-green"></i> <strong>مدة الباقة:</strong> شهر كامل (30 يوماً) فرم مستمر 24/7</li>
+              <li data-i18n="plan_diamond_f2"><i class="fas fa-check text-green"></i> <strong>رتب الخمول:</strong> برونزي + فضي + ذهبي كاملة</li>
+              <li data-i18n="plan_diamond_f3"><i class="fas fa-check text-green"></i> الأكل التلقائي الذكي عند نقص الجوع لحماية اللاعب</li>
+              <li data-i18n="plan_diamond_f4"><i class="fas fa-check text-green"></i> تفريغ الموارد واللوت النادر في الصناديق ذاتياً</li>
+              <li data-i18n="plan_diamond_f5"><i class="fas fa-check text-green"></i> تجميع نقاط الخبرة ليفل (XP Farming)</li>
+              <li data-i18n="plan_diamond_f6"><i class="fas fa-check text-green"></i> استلام رتبة @AFK Grinder وجوائز الذهب والألماس</li>
+              <li data-i18n="plan_diamond_f7"><i class="fas fa-check text-green"></i> إشعارات تفصيلية في خاص الديسكورد لحظة بلحظة</li>
+            </ul>
+          </div>
+          <div class="price-card-actions">
+            <button class="btn-plan-buy-now btn-buy-diamond" onclick="openPurchaseModal('diamond')" data-i18n="plan_diamond_btn">
+              <i class="fas fa-bolt"></i> شراء الباقة واستلام الكود بالخاص 📩
+            </button>
+          </div>
+        </div>
+
+        <!-- Plan 3: VIP All-Inclusive (30 Days - $30) -->
+        <div class="price-card tier-vip" id="cardPlanVip">
+          <div class="p-vip-tag" data-i18n="plan_vip_tag">الشاملة لكل الميزات 👑</div>
+          <div>
+            <div class="p-badge" data-i18n="plan_vip_badge"><i class="fas fa-crown text-gold"></i> باقة النخبة والملوك</div>
+            <div class="p-title" data-i18n="plan_vip_title">باقة VIP الشاملة (شهر كامل)</div>
+            <div class="p-price text-gold" data-i18n="plan_vip_price">$30 <span>/ شهر كامل (30 يوم)</span></div>
+            <div class="tier-support-pill pill-vip" data-i18n="plan_vip_pill">
+              <i class="fas fa-crown"></i>
+              <span>تدعم: برونزي، فضي، ذهبي، ماسي، أسطوري</span>
+            </div>
+            <ul class="p-features">
+              <li data-i18n="plan_vip_f1"><i class="fas fa-check text-gold"></i> <strong>تدعم كل الميزات ورتب الخمول بلا استثناء:</strong></li>
+              <li data-i18n="plan_vip_f2"><i class="fas fa-check text-gold"></i> <strong>برونزي + فضي + ذهبي + ماسي + أسطوري (Netherite)</strong></li>
+              <li data-i18n="plan_vip_f3"><i class="fas fa-check text-green"></i> تشغيل خادم مخصص 24/7 طوال الشهر دون انقطاع</li>
+              <li data-i18n="plan_vip_f4"><i class="fas fa-check text-green"></i> إعادة اتصال فوري تلقائي عند رستارت السيرفر</li>
+              <li data-i18n="plan_vip_f5"><i class="fas fa-check text-green"></i> استلام أندر مكافآت اللعبة (حطام قديم، نيثرايت، كتب Mending)</li>
+              <li data-i18n="plan_vip_f6"><i class="fas fa-check text-green"></i> رتبة VIP خاصة وفخمة بسيرفر الديسكورد الرسمي</li>
+              <li data-i18n="plan_vip_f7"><i class="fas fa-check text-green"></i> دعم فني وصيانة بأولوية قصوى على مدار الساعة</li>
+            </ul>
+          </div>
+          <div class="price-card-actions">
+            <button class="btn-plan-buy-now btn-buy-vip" onclick="openPurchaseModal('vip')" data-i18n="plan_vip_btn">
+              <i class="fas fa-crown"></i> شراء الباقة واستلام الكود بالخاص 📩
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: DISCORD-ONLY ACTIVATION GUIDE -->
+    <section class="portal-section" id="how-to-activate">
+      <div class="section-head">
+        <div class="section-tag" data-i18n="guide_badge"><i class="fab fa-discord text-discord"></i> التحكم والترخيص الذاتي</div>
+        <h2 class="section-title" data-i18n="guide_title">طريقة الشراء والتفعيل التلقائي بالديسكورد</h2>
+        <p class="section-sub" data-i18n="guide_sub">
+          النظام يعمل بنظام تراخيص مشفرة: اشترِ باقتك وسيصلك كود التفعيل في الخاص (DM) لتفعيله بروم الأوامر بضغطة زر دون تدخل أحد!
+        </p>
+      </div>
+
+      <!-- 4 Step Cards -->
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-icon"><i class="fas fa-credit-card text-gold"></i></div>
+          <div class="step-title" data-i18n="step1_title">1. اشترِ واستلم كود التفعيل</div>
+          <div class="step-desc" data-i18n="step1_desc">
+            اضغط زر "شراء الباقة"، وسيقوم البوت بإصدار كود ترخيص مشفّر وإرساله فوراً إلى خاص حسابك بالديسكورد (DM).
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-icon"><i class="fas fa-key text-cyan"></i></div>
+          <div class="step-title" data-i18n="step2_title">2. انسخ كود التفعيل المشفّر</div>
+          <div class="step-desc" data-i18n="step2_desc">
+            الكود مخصص لحسابك ومحمي بقاعدة بيانات مشفرة (مثل <code dir="ltr">GOAT-DIA-...</code>) مع أمر التفعيل الجاهز.
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-icon"><i class="fas fa-terminal text-green"></i></div>
+          <div class="step-title" data-i18n="step3_title">3. فعّل اشتراكك بأمر (<span dir="ltr" class="step-cmd-tag">/redeem</span>)</div>
+          <div class="step-desc" data-i18n="step3_desc">
+            ادخل روم الأوامر في سيرفر <strong>𝑮.𝑶.𝑨.𝑻 ™</strong> واكتب: <code dir="ltr">/redeem code:كودك</code> لتوثيق باقتك فوراً.
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">4</div>
+          <div class="step-icon"><i class="fas fa-robot text-purple"></i></div>
+          <div class="step-title" data-i18n="step4_title">4. ابدأ الفرم بأمر (<span dir="ltr" class="step-cmd-tag">/farm_start</span>)</div>
+          <div class="step-desc" data-i18n="step4_desc">
+            اكتب أمر التشغيل ليدخل البوت سيرفرك بحسابك ويبدأ الفرم 24/7 وتصلك رسائل الخمول والمكافآت في الخاص!
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: ALL DISCORD COMMANDS FOR SUBSCRIBERS (High-Contrast, Bright & Clear) -->
+      <div class="discord-commands-board">
+        <div class="commands-board-head">
+          <div>
+            <div class="commands-board-title" data-i18n="cmd_board_title">
+              <i class="fab fa-discord text-discord" style="font-size: 1.7rem;"></i>
+              <span>جميع أوامر ديسكورد المتاحة للمشترك (Discord Commands)</span>
+            </div>
+            <div class="commands-board-subtitle" data-i18n="cmd_board_sub">
+              جميع أوامر الفرم والخمول تعمل مباشرة داخل شات ديسكورد عبر كتابة علامة سلاش (/) بنقرة زر:
+            </div>
+          </div>
+          <div class="commands-board-badge">
+            <span class="pulse-dot green" style="width: 10px; height: 10px;"></span>
+            <span data-i18n="cmd_board_badge">الأوامر مفعلة 24/7 بسيرفر 𝑮.𝑶.𝑨.𝑻 ™</span>
+          </div>
+        </div>
+
+        <div class="commands-list-grid">
+          <!-- Command 0: /redeem (Subscription Key Activation) -->
+          <div class="cmd-card-item featured" style="border-color: rgba(251, 191, 36, 0.5); background: linear-gradient(145deg, rgba(251, 191, 36, 0.08), rgba(8, 11, 20, 0.95)); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(251, 191, 36, 0.15);">
+            <div class="cmd-card-top">
+              <span class="cmd-name-badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border-color: rgba(251, 191, 36, 0.6);" dir="ltr"><i class="fas fa-key"></i> /redeem</span>
+              <span class="cmd-category-tag" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4);" data-i18n="cmd_redeem_tag">
+                <i class="fas fa-lock-open"></i> أمر التفعيل وتنشيط الترخيص الإجباري
+              </span>
+            </div>
+            <div class="cmd-card-desc" data-i18n="cmd_redeem_desc">
+              <strong>تنشيط وتوثيق كود الترخيص:</strong> يُكتب في روم الأوامر لتفعيل اشتراكك فور استلام الكود من الموقع أو من الخاص، وتوثيق حسابك في قاعدة البيانات المحمية ومنحك صلاحية استخدام أوامر الفرم <code dir="ltr" style="color: #00f2fe; font-weight: 800;">/farm_start</code>!
+            </div>
+
+            <!-- Parameters Grid Box for Redeem Code -->
+            <div class="cmd-params-container" style="background: rgba(0, 0, 0, 0.45); border-color: rgba(251, 191, 36, 0.3);">
+              <div class="cmd-params-head">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <i class="fas fa-ticket text-gold"></i>
+                  <span data-i18n="cmd_redeem_guide">ضع كود الترخيص المشفّر هنا لتجهيز أمر التفعيل بنقرة زر:</span>
+                </div>
+                <span class="live-gen-pill" style="border-color: rgba(251, 191, 36, 0.4); color: #fbbf24;">
+                  <span class="pulse-dot gold" style="width: 8px; height: 8px; background: #fbbf24;"></span>
+                  <span data-i18n="cmd_redeem_live">توليد تلقائي فوري</span>
+                </span>
+              </div>
+              <div class="param-box" style="margin-top: 10px;">
+                <div class="param-box-top">
+                  <span class="param-name-badge" dir="ltr" style="color: #fbbf24; border-color: rgba(251, 191, 36, 0.4);">code:</span>
+                  <i class="fas fa-shield-halved text-gold"></i>
+                </div>
+                <input type="text" id="cmdInputRedeemCode" class="param-input" placeholder="مثال: GOAT-DIA-A7X9-B3K2" data-i18n-placeholder="param_redeem_placeholder" value="GOAT-DIA-X79K-Q42M" oninput="updateLiveRedeemCommand()">
+                <div class="param-box-desc" data-i18n="param_redeem_desc">كود الترخيص المشفّر المستلم بالخاص أو بعد إتمام الشراء من الموقع</div>
+              </div>
+            </div>
+
+            <!-- Live Copy Bar -->
+            <div class="cmd-copy-bar featured-bar" style="border-top-color: rgba(251, 191, 36, 0.25);">
+              <div class="cmd-copy-code-wrap">
+                <span class="cmd-terminal-prompt" style="color: #fbbf24;"><i class="fas fa-key"></i></span>
+                <code class="cmd-copy-code" id="liveRedeemCmd" dir="ltr" style="color: #fde68a;">/redeem code:GOAT-DIA-X79K-Q42M</code>
+              </div>
+              <button class="cmd-copy-btn btn-featured" style="background: linear-gradient(135deg, #fbbf24, #d97706); color: #080a10;" id="btnCopyLiveRedeemCmd" onclick="copyLiveRedeemCommand()" data-i18n="cmd_redeem_copy_btn">
+                <i class="fas fa-copy"></i> نسخ أمر التفعيل ولصقه في ديسكورد
+              </button>
+            </div>
+          </div>
+
+          <!-- Command 1: /farm_start (Featured Master Command) -->
+          <div class="cmd-card-item featured">
+            <div class="cmd-card-top">
+              <span class="cmd-name-badge" dir="ltr"><i class="fas fa-terminal" style="font-size: 0.85em; opacity: 0.9;"></i> /farm_start</span>
+              <span class="cmd-category-tag cmd-tag-featured" data-i18n="cmd_farm_tag">
+                <i class="fas fa-bolt"></i> أمر التشغيل والتخصيص الفوري
+              </span>
+            </div>
+            <div class="cmd-card-desc" data-i18n="cmd_farm_desc">
+              <strong>أمر تشغيل وتخصيص البوت في سيرفرك:</strong> يقوم بإدخال البوت فوراً إلى السيرفر بحسابك، ويتمركز في منطقة الأمان (Safe Zone)، ويبدأ الفرم وحمايتك من الطرد، وتصلك رسائل تفعيل الاشتراك وبدء الخمول بالخاص (DM)!
+            </div>
+
+            <!-- Parameters Grid Box (Interactive Live Generator) -->
+            <div class="cmd-params-container">
+              <div class="cmd-params-head">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <i class="fas fa-sliders text-gold"></i>
+                  <span data-i18n="cmd_farm_guide">املأ معلوماتك هنا ليتولد أمر التشغيل تلقائياً وتنسخه فوراً:</span>
+                </div>
+                <span class="live-gen-pill">
+                  <span class="pulse-dot green" style="width: 8px; height: 8px;"></span>
+                  <span data-i18n="cmd_redeem_live">توليد تلقائي فوري (Live)</span>
+                </span>
+              </div>
+              <div class="cmd-params-grid">
+                <!-- Param 1: Server IP -->
+                <div class="param-box">
+                  <div class="param-box-top">
+                    <span class="param-name-badge" dir="ltr">server:</span>
+                    <i class="fas fa-globe text-cyan"></i>
+                  </div>
+                  <input type="text" id="cmdInputServer" class="param-input" placeholder="مثال: play.skyblock.net" data-i18n-placeholder="param_server_placeholder" value="play.skyblock.net" oninput="updateLiveFarmCommand()">
+                  <div class="param-box-desc" data-i18n="param_server_desc">آيبي السيرفر المطلوب الفرم فيه</div>
+                </div>
+
+                <!-- Param 2: Minecraft IGN -->
+                <div class="param-box">
+                  <div class="param-box-top">
+                    <span class="param-name-badge" dir="ltr">username:</span>
+                    <i class="fas fa-user-astronaut text-green"></i>
+                  </div>
+                  <input type="text" id="cmdInputUsername" class="param-input" placeholder="اسم حسابك بماينكرافت" data-i18n-placeholder="param_user_placeholder" value="MyPlayer" oninput="updateLiveFarmCommand()">
+                  <div class="param-box-desc" data-i18n="param_user_desc">اسم حسابك في اللعبة (IGN)</div>
+                </div>
+
+                <!-- Param 3: Server Port -->
+                <div class="param-box">
+                  <div class="param-box-top">
+                    <span class="param-name-badge" dir="ltr">port:</span>
+                    <i class="fas fa-ethernet text-gold"></i>
+                  </div>
+                  <input type="text" id="cmdInputPort" class="param-input" placeholder="25565" value="25565" oninput="updateLiveFarmCommand()">
+                  <div class="param-box-desc" data-i18n="param_port_desc">بورت السيرفر (الافتراضي: 25565)</div>
+                </div>
+
+                <!-- Param 4: Password (optional) -->
+                <div class="param-box">
+                  <div class="param-box-top">
+                    <span class="param-name-badge" dir="ltr">password:</span>
+                    <i class="fas fa-key text-red"></i>
+                  </div>
+                  <div class="param-input-wrap">
+                    <input type="password" id="cmdInputPassword" class="param-input" placeholder="كلمة المرور (إذا مكرك)" data-i18n-placeholder="param_pwd_placeholder" oninput="updateLiveFarmCommand()">
+                    <button type="button" class="pwd-toggle-btn" onclick="toggleCmdPasswordVisibility()" title="إظهار/إخفاء كلمة المرور">
+                      <i class="fas fa-eye" id="cmdPwdEyeIcon"></i>
+                    </button>
+                  </div>
+                  <div class="param-box-desc" data-i18n="param_pwd_desc">اختياري: لتسجيل الدخول <code dir="ltr">/login</code></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Copy Bar -->
+            <div class="cmd-copy-bar featured-bar">
+              <div class="cmd-copy-code-wrap">
+                <span class="cmd-terminal-prompt"><i class="fab fa-discord"></i></span>
+                <code class="cmd-copy-code" id="liveFarmStartCmd" dir="ltr">/farm_start server:play.skyblock.net username:MyPlayer port:25565</code>
+              </div>
+              <button class="cmd-copy-btn btn-featured" id="btnCopyLiveFarmCmd" onclick="copyLiveFarmCommand()" data-i18n="cmd_farm_copy_btn">
+                <i class="fas fa-copy"></i> نسخ الأمر المكتمل ولصقه في ديسكورد
+              </button>
+            </div>
+          </div>
+
+          <!-- Command 2: /my_bot -->
+          <div class="cmd-card-item accent-cyan">
+            <div class="cmd-card-top">
+              <span class="cmd-name-badge cmd-badge-cyan" dir="ltr">/my_bot</span>
+              <span class="cmd-category-tag cmd-tag-cyan" data-i18n="cmd_mybot_tag"><i class="fas fa-user-clock"></i> متابعة الجلسة</span>
+            </div>
+            <div class="cmd-card-desc" data-i18n="cmd_mybot_desc">
+              <strong>فحص ومتابعة جلسة البوت:</strong> يعرض لك عدد ساعات الفرم المستمرة، حالة اتصال البوت بالسيرفر، ونشاط موديول الحماية من الطرد Anti-AFK.
+            </div>
+            <div class="cmd-copy-bar">
+              <code class="cmd-copy-code" dir="ltr">/my_bot</code>
+              <button class="cmd-copy-btn" onclick="copyCustomCommand('/my_bot')" data-i18n="btn_copy_generic">
+                <i class="fas fa-copy"></i> نسخ
+              </button>
+            </div>
+          </div>
+
+          <!-- Command 3: /farm_stop -->
+          <div class="cmd-card-item accent-red">
+            <div class="cmd-card-top">
+              <span class="cmd-name-badge cmd-badge-red" dir="ltr">/farm_stop</span>
+              <span class="cmd-category-tag cmd-tag-red" data-i18n="cmd_farmstop_tag"><i class="fas fa-power-off"></i> إيقاف البوت</span>
+            </div>
+            <div class="cmd-card-desc" data-i18n="cmd_farmstop_desc">
+              <strong>إيقاف جلسة البوت بأمان:</strong> يفصل البوت من سيرفرك بعد التأكد من حفظ وتفريغ الموارد في الصندوق، لتستطيع الدخول واللعب بنفسك.
+            </div>
+            <div class="cmd-copy-bar">
+              <code class="cmd-copy-code" dir="ltr">/farm_stop</code>
+              <button class="cmd-copy-btn" style="background: #dc2626;" onclick="copyCustomCommand('/farm_stop')" data-i18n="btn_copy_generic">
+                <i class="fas fa-copy"></i> نسخ
+              </button>
+            </div>
+          </div>
+
+          <!-- Command 4: /plans -->
+          <div class="cmd-card-item accent-amber">
+            <div class="cmd-card-top">
+              <span class="cmd-name-badge cmd-badge-amber" dir="ltr">/plans</span>
+              <span class="cmd-category-tag cmd-tag-amber" data-i18n="cmd_plans_tag"><i class="fas fa-gem"></i> الباقات والأسعار</span>
+            </div>
+            <div class="cmd-card-desc" data-i18n="cmd_plans_desc">
+              <strong>استعراض باقات الاشتراك:</strong> يعرض أسعار ومميزات باقات البوت (تجربة 24 ساعة بـ $5، الماسية شهر بـ $15، و VIP شهر بـ $30) مباشرة في شات السيرفر.
+            </div>
+            <div class="cmd-copy-bar">
+              <code class="cmd-copy-code" dir="ltr">/plans</code>
+              <button class="cmd-copy-btn" style="background: #d97706;" onclick="copyCustomCommand('/plans')" data-i18n="btn_copy_generic">
+                <i class="fas fa-copy"></i> نسخ
+              </button>
+            </div>
+          </div>
+
+          <!-- Command 5: /status -->
+          <div class="cmd-card-item accent-emerald">
+            <div class="cmd-card-top">
+              <span class="cmd-name-badge cmd-badge-emerald" dir="ltr">/status</span>
+              <span class="cmd-category-tag cmd-tag-emerald" data-i18n="cmd_status_tag"><i class="fas fa-chart-line"></i> فحص الاتصال</span>
+            </div>
+            <div class="cmd-card-desc" data-i18n="cmd_status_desc">
+              <strong>حالة البوت والسرعة:</strong> يقيس سرعة استجابة البوت (Latency Ping)، وحالة السيرفر المتصل به، والموارد التي تم جمعها.
+            </div>
+            <div class="cmd-copy-bar">
+              <code class="cmd-copy-code" dir="ltr">/status</code>
+              <button class="cmd-copy-btn" style="background: #059669;" onclick="copyCustomCommand('/status')" data-i18n="btn_copy_generic">
+                <i class="fas fa-copy"></i> نسخ
+              </button>
+            </div>
+          </div>
+
+          <!-- Command 6: /rewards -->
+          <div class="cmd-card-item accent-purple">
+            <div class="cmd-card-top">
+              <span class="cmd-name-badge cmd-badge-purple" dir="ltr">/rewards</span>
+              <span class="cmd-category-tag cmd-tag-purple" data-i18n="cmd_rewards_tag"><i class="fas fa-gift"></i> جدول المكافآت</span>
+            </div>
+            <div class="cmd-card-desc" data-i18n="cmd_rewards_desc">
+              <strong>استعراض جوائز الخمول:</strong> يعرض قائمة مكافآت الخمول المستمر (البرونزي، الفضي، الذهبي، الألماسي، والأسطوري) ورتب الديسكورد.
+            </div>
+            <div class="cmd-copy-bar">
+              <code class="cmd-copy-code" dir="ltr">/rewards</code>
+              <button class="cmd-copy-btn" style="background: #9333ea;" onclick="copyCustomCommand('/rewards')" data-i18n="btn_copy_generic">
+                <i class="fas fa-copy"></i> نسخ
+              </button>
+            </div>
+          </div>
+
+          <!-- Command 7: /help -->
+          <div class="cmd-card-item accent-blurple">
+            <div class="cmd-card-top">
+              <span class="cmd-name-badge cmd-badge-blurple" dir="ltr">/help</span>
+              <span class="cmd-category-tag cmd-tag-blurple" data-i18n="cmd_help_tag"><i class="fas fa-circle-question"></i> دليل المساعدة</span>
+            </div>
+            <div class="cmd-card-desc" data-i18n="cmd_help_desc">
+              <strong>قائمة المساعدة والدعم الفني:</strong> يعرض دليلاً كاملاً لأوامر البوت وأزرار تفاعلية سريعة لفحص الحالة والمكافآت وحل المشكلات.
+            </div>
+            <div class="cmd-copy-bar">
+              <code class="cmd-copy-code" dir="ltr">/help</code>
+              <button class="cmd-copy-btn" onclick="copyCustomCommand('/help')" data-i18n="btn_copy_generic">
+                <i class="fas fa-copy"></i> نسخ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: SYSTEM EXPLANATION & MINECRAFT FEATURES -->
+    <section class="portal-section" id="system-features">
+      <div class="section-head">
+        <div class="section-tag" data-i18n="features_badge"><i class="fas fa-wand-magic-sparkles text-cyan"></i> آليات وماينكرافت</div>
+        <h2 class="section-title" data-i18n="features_title">شرح نظام الفرم وميزات الخمول الذكي</h2>
+        <p class="section-sub" data-i18n="features_sub">
+          تقنيات برمجية مخصصة تجعل الروبوت يتصرف كلاعب حقيقي ويتفادى أنظمة الكشف ويحمي مواردك على مدار الساعة
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="f-icon cyan"><i class="fas fa-person-walking"></i></div>
+          <div class="f-title" data-i18n="f1_title">حماية Anti-AFK الذكية</div>
+          <div class="f-desc" data-i18n="f1_desc">
+            يقوم البوت بالقفز والحركة الدورية بزوايا عشوائية تجعل سيرفر ماينكرافت يعتبره لاعباً نشطاً، مما يمنع طرده نهائياً.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="f-icon gold"><i class="fas fa-khanda"></i></div>
+          <div class="f-title" data-i18n="f2_title">الضرب بالسيف والفرم التلقائي</div>
+          <div class="f-desc" data-i18n="f2_desc">
+            ضرب الوحوش والموبات أمام المزارع (Spawners) بنظام كولداون دقيق لجمع نقاط الخبرة XP واللوت النادر بأعلى كفاءة.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="f-icon green"><i class="fas fa-drumstick-bite"></i></div>
+          <div class="f-title" data-i18n="f3_title">الأكل الذاتي وحماية الصحة</div>
+          <div class="f-desc" data-i18n="f3_desc">
+            مراقبة عداد الجوع باستمرار، وعند نقص الطعام يتناول البوت الأكل من الحقيبة تلقائياً حتى لا يموت اللاعب بسبب الجوع.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="f-icon purple"><i class="fas fa-boxes-stacked"></i></div>
+          <div class="f-title" data-i18n="f4_title">تفريغ الموارد في الصناديق</div>
+          <div class="f-desc" data-i18n="f4_desc">
+            عندما توشك حقيبة اللاعب على الامتلاء، يفتح البوت الصندوق القريب ويفرغ السبائك والموارد النادرة لضمان عدم ضياع أي لوت.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="f-icon cyan"><i class="fas fa-rotate"></i></div>
+          <div class="f-title" data-i18n="f5_title">إعادة اتصال فوري تلقائي</div>
+          <div class="f-desc" data-i18n="f5_desc">
+            إذا حدث ريستارت للسيرفر أو انقطاع مفاجئ، يقوم البوت بإعادة الاتصال والدخول مجدداً دون الحاجة لتدخلك.
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="f-icon gold"><i class="fab fa-discord"></i></div>
+          <div class="f-title" data-i18n="f6_title">ربط ديسكورد وإشعارات الخاص</div>
+          <div class="f-desc" data-i18n="f6_desc">
+            تصلك رسائل فورية على خاص الديسكورد (DM) عند تفعيل الاشتراك، وعند بدء الخمول، وعند ترقية أي مستوى مكافأة!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: AFK REWARD TIERS -->
+    <section class="portal-section" id="reward-tiers">
+      <div class="section-head">
+        <div class="section-tag" data-i18n="reward_badge"><i class="fas fa-trophy text-gold"></i> مستويات الجوائز</div>
+        <h2 class="section-title" data-i18n="reward_title">جدول مكافآت الخمول المستمر</h2>
+        <p class="section-sub" data-i18n="reward_sub">
+          كلما بقيت داخل منطقة الأمان وسجلت ساعات خمول أطول، تحصل على رتب وجوائز أسطورية تتدرج من البرونزي حتى النيثرايت!
+        </p>
+      </div>
+
+      <div class="tiers-grid">
+        <!-- Bronze -->
+        <div class="tier-card-modern bronze">
+          <span class="tier-badge-pill" data-i18n="tier1_pill">المستوى 1</span>
+          <div style="font-weight: 800; color: #cd7f32; margin-bottom: 4px;" data-i18n="tier1_title">البرونزي (Bronze)</div>
+          <div class="tier-hours" data-i18n="tier1_hours">3 ساعات</div>
+          <div class="tier-loot" data-i18n="tier1_loot">
+            16x سبائك حديد + 500 XP + 10 عملات ديسكورد
+          </div>
+        </div>
+
+        <!-- Silver -->
+        <div class="tier-card-modern silver">
+          <span class="tier-badge-pill" data-i18n="tier2_pill">المستوى 2</span>
+          <div style="font-weight: 800; color: #c0c0c0; margin-bottom: 4px;" data-i18n="tier2_title">الفضي (Silver)</div>
+          <div class="tier-hours" data-i18n="tier2_hours">6 ساعات</div>
+          <div class="tier-loot" data-i18n="tier2_loot">
+            8x سبائك ذهب + 3x ألماس + كتاب Unbreaking III
+          </div>
+        </div>
+
+        <!-- Gold -->
+        <div class="tier-card-modern gold">
+          <span class="tier-badge-pill" data-i18n="tier3_pill">المستوى 3</span>
+          <div style="font-weight: 800; color: var(--mc-gold); margin-bottom: 4px;" data-i18n="tier3_title">الذهبي (Gold)</div>
+          <div class="tier-hours" data-i18n="tier3_hours">9 ساعات</div>
+          <div class="tier-loot" data-i18n="tier3_loot">
+            8x ألماس + 2x تفاح ذهبي + رتبة @AFK Grinder
+          </div>
+        </div>
+
+        <!-- Diamond -->
+        <div class="tier-card-modern diamond">
+          <span class="tier-badge-pill" data-i18n="tier4_pill">المستوى 4</span>
+          <div style="font-weight: 800; color: var(--mc-diamond); margin-bottom: 4px;" data-i18n="tier4_title">الألماسي (Diamond)</div>
+          <div class="tier-hours" data-i18n="tier4_hours">12 ساعة</div>
+          <div class="tier-loot" data-i18n="tier4_loot">
+            1x Ancient Debris + كتاب Mending + تفاحة نوتش
+          </div>
+        </div>
+
+        <!-- Netherite Legend -->
+        <div class="tier-card-modern netherite">
+          <span class="tier-badge-pill" data-i18n="tier5_pill">المستوى 5 الأسطوري</span>
+          <div style="font-weight: 800; color: #d4a373; margin-bottom: 4px;" data-i18n="tier5_title">النيثرايت (Legend)</div>
+          <div class="tier-hours" data-i18n="tier5_hours">24 ساعة</div>
+          <div class="tier-loot" data-i18n="tier5_loot">
+            1x سبيكة نيثرايت كاملة + درع مخصص + رتبة @AFK Legend دائمة!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: LIVE DISCORD DM SHOWCASE -->
+    <section class="portal-section">
+      <div class="section-head">
+        <div class="section-tag" data-i18n="dm_showcase_badge"><i class="fas fa-envelope-circle-check text-gold"></i> رسائل الخاص التلقائية</div>
+        <h2 class="section-title" data-i18n="dm_showcase_title">معاينة رسائل الخاص التي تصلك في الديسكورد (DM)</h2>
+        <p class="section-sub" data-i18n="dm_showcase_sub">
+          بمجرد تفعيل البوت عبر أمر الديسكورد، يرسل لك البوت هاتين الرسالتين مباشرة في الخاص:
+        </p>
+      </div>
+
+      <div class="dm-preview-grid">
+        <!-- DM Card 1: Subscription Confirmation -->
+        <div class="dm-preview-card gold-border">
+          <div class="dm-card-header">
+            <img src="https://files.catbox.moe/6pndxl.png" class="dm-card-avatar" alt="Goat Bot">
+            <div class="dm-card-author-info">
+              <div class="dm-card-author-row">
+                <span class="dm-card-author-name">Goat AFK Rewards</span>
+                <span class="bot-tag">BOT</span>
+              </div>
+              <span class="dm-card-author-sub" data-i18n="dm1_sub">📩 رسالة خاصة 1: تأكيد تفعيل الاشتراك</span>
+            </div>
+          </div>
+
+          <div class="dm-card-title gold" data-i18n="dm1_title">
+            💎 تم تفعيل اشتراكك بنجاح في بوت الفرم الذكي
+          </div>
+
+          <p class="dm-card-desc" data-i18n="dm1_desc">
+            مرحباً بك يا بطل! تم استلام وتفعيل باقة اشتراكك بنجاح، وبوت الفرم جاهز للعمل على مدار الساعة لحسابك الخاص.
+          </p>
+
+          <div class="dm-card-fields">
+            <div class="dm-field-item">
+              <span data-i18n="dm1_plan_lbl">👑 <strong>الباقة المفعلة:</strong></span>
+              <span class="text-gold" style="font-weight: 700;" data-i18n="dm1_plan_val">🥈 باقة الجرايندر الأسبوعية (7 أيام)</span>
+            </div>
+            <div class="dm-field-item">
+              <span data-i18n="dm1_mc_lbl">🎮 <strong>حساب ماينكرافت:</strong></span>
+              <code style="color: var(--mc-diamond);">Steve_Farmer</code>
+            </div>
+            <div class="dm-field-item">
+              <span data-i18n="dm1_server_lbl">🌐 <strong>سيرفر الهدف:</strong></span>
+              <code style="color: #55ff55;">play.skyblock.net:25565</code>
+            </div>
+            <div class="dm-field-item">
+              <span data-i18n="dm1_feat_lbl">🛡️ <strong>الميزات:</strong></span>
+              <span style="color: #e2e8f0;" data-i18n="dm1_feat_val">🟢 حماية Anti-AFK + ضرب الوحوش + حفظ الموارد</span>
+            </div>
+            <div class="dm-field-item">
+              <span data-i18n="dm1_ctrl_lbl">📱 <strong>التحكم:</strong></span>
+              <code style="color: #ffaa00;">/my_bot</code> <span data-i18n="dm1_ctrl_mybot">لمتابعة الجلسة |</span> <code style="color: #ff5555;">/farm_stop</code> <span data-i18n="dm1_ctrl_stop">للإيقاف</span>
+            </div>
+          </div>
+
+          <div class="dm-card-footer">
+            <span data-i18n="dm1_footer">Goat AFK Rewards • خدمة المشتركين المميزة</span>
+            <span style="direction: ltr; font-family: monospace;" data-i18n="dm_time_preview">اليوم الساعة 11:30 PM</span>
+          </div>
+        </div>
+
+        <!-- DM Card 2: AFK Mode Started -->
+        <div class="dm-preview-card green-border">
+          <div class="dm-card-header">
+            <img src="https://files.catbox.moe/6pndxl.png" class="dm-card-avatar" alt="Goat Bot">
+            <div class="dm-card-author-info">
+              <div class="dm-card-author-row">
+                <span class="dm-card-author-name">Goat AFK Rewards</span>
+                <span class="bot-tag">BOT</span>
+              </div>
+              <span class="dm-card-author-sub" data-i18n="dm2_sub">🐺 رسالة خاصة 2: الدخول في وضع الخمول</span>
+            </div>
+          </div>
+
+          <div class="dm-card-title green" data-i18n="dm2_title">
+            🐺 بدأ وضع الخمول الآن بنجاح (AFK Mode Active)
+          </div>
+
+          <p class="dm-card-desc" data-i18n="dm2_desc">
+            دخل البوت بنجاح إلى السيرفر وتمركز في منطقة الأمان (Safe Zone). بدأ احتساب ساعات الخمول وحصد الموارد النادرة!
+          </p>
+
+          <div class="dm-card-fields">
+            <div class="dm-field-item">
+              <span data-i18n="dm2_loc_lbl">📍 <strong>الموقع الحالي:</strong></span>
+              <span style="color: #38bdf8; font-weight: 700;" data-i18n="dm2_loc_val">Safe Zone (محمي بنسبة 100%)</span>
+            </div>
+            <div class="dm-field-item">
+              <span data-i18n="dm2_timer_lbl">⏱️ <strong>مؤقت الخمول:</strong></span>
+              <span style="color: #00ff88; font-weight: 700;" data-i18n="dm2_timer_val">بدأ الآن 🟢 (00:00:01)</span>
+            </div>
+            <div class="dm-field-item">
+              <span data-i18n="dm2_loot_lbl">🏆 <strong>الجوائز القادمة:</strong></span>
+              <span style="color: #e2e8f0;" data-i18n="dm2_loot_val">سبائك حديد، ذهب، ألماس، نيثرايت، كتب نادرة</span>
+            </div>
+            <div class="dm-field-item">
+              <span data-i18n="dm2_prot_lbl">🛡️ <strong>نظام الحماية:</strong></span>
+              <span style="color: #e2e8f0;" data-i18n="dm2_prot_val">🟢 حركة ذكية وقفز دوري لمنع الطرد</span>
+            </div>
+          </div>
+
+          <div class="dm-card-footer">
+            <span data-i18n="dm2_footer">ستصلك رسالة بالخاص فور ترقية مستواك أو فتح الصناديق!</span>
+            <span style="direction: ltr; font-family: monospace;" data-i18n="dm_time_preview">اليوم الساعة 11:30 PM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="brand-badge" style="width: 34px; height: 34px; box-shadow: 0 0 10px rgba(85, 255, 255, 0.3);">
+          <img src="goat_avatar.png" alt="Logo">
+        </div>
+        <span style="font-weight: 800; color: #fff; font-size: 1.1rem;">Goat AFK Rewards</span>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 500px;" data-i18n="footer_text">
+        سيرفر الديسكورد الرسمي: <strong>𝑮.𝑶.𝑨.𝑻 ™</strong> • نظام فرم وحماية خمول ذاتي متكامل لماينكرافت.
+      </p>
+      <div style="display: flex; gap: 16px; font-size: 0.85rem;">
+        <a href="#pricing-plans" style="color: var(--mc-diamond); text-decoration: none;" data-i18n="footer_link_plans">الباقات والأسعار</a>
+        <a href="#how-to-activate" style="color: var(--mc-diamond); text-decoration: none;" data-i18n="footer_link_activate">طريقة التفعيل بالديسكورد</a>
+        <a href="#system-features" style="color: var(--mc-diamond); text-decoration: none;" data-i18n="footer_link_features">ميزات النظام</a>
+      </div>
+      <div style="font-size: 0.75rem; color: #64748b; margin-top: 8px;" data-i18n="footer_copy">
+        © 2026 Goat AFK Rewards. جميع الحقوق محفوظة.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Purchase & License Issuance Modal -->
+  <div class="license-modal-overlay" id="purchaseLicenseModal" onclick="handleModalBackdropClick(event)">
+    <div class="license-modal-dialog">
+      <!-- Modal Header -->
+      <div class="modal-header-bar">
+        <div class="modal-header-title" data-i18n="modal_title">
+          <i class="fas fa-crown text-gold"></i>
+          <span>شراء الباقة واستلام كود التفعيل المشفّر</span>
+        </div>
+        <button class="modal-close-btn" onclick="closePurchaseModal()" title="إغلاق">
+          <i class="fas fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Checkout Form View -->
+      <div class="modal-body-content" id="modalCheckoutView">
+        <!-- Plan Switcher Pills -->
+        <div class="modal-plan-selector">
+          <div class="modal-plan-tab" id="modalTabBronze" onclick="changeSelectedPurchasePlan('bronze')">
+            <div class="modal-tab-name" data-i18n="modal_tab_bronze_name">🥉 التجربة اليومية</div>
+            <div class="modal-tab-price text-bronze" data-i18n="modal_tab_bronze_price">$5 <span style="font-size:0.75rem; color:#cbd5e1;">(7,500 د.ع)</span></div>
+          </div>
+          <div class="modal-plan-tab active" id="modalTabDiamond" onclick="changeSelectedPurchasePlan('diamond')">
+            <div class="modal-tab-name" data-i18n="modal_tab_diamond_name">💎 الماسية الشهرية</div>
+            <div class="modal-tab-price text-cyan" data-i18n="modal_tab_diamond_price">$15 <span style="font-size:0.75rem; color:#cbd5e1;">(22,500 د.ع)</span></div>
+          </div>
+          <div class="modal-plan-tab" id="modalTabVip" onclick="changeSelectedPurchasePlan('vip')">
+            <div class="modal-tab-name" data-i18n="modal_tab_vip_name">👑 VIP الشاملة</div>
+            <div class="modal-tab-price text-gold" data-i18n="modal_tab_vip_price">$30 <span style="font-size:0.75rem; color:#cbd5e1;">(45,000 د.ع)</span></div>
+          </div>
+        </div>
+
+        <!-- Selected Plan Summary Card -->
+        <div class="modal-selected-summary">
+          <div class="summary-left">
+            <div class="summary-icon diamond" id="modalSummaryIcon">
+              <i class="fas fa-gem" id="modalSummaryIconI"></i>
+            </div>
+            <div>
+              <div class="summary-title" id="modalSummaryTitle">الباقة الماسية (شهر كامل)</div>
+              <div class="summary-sub" id="modalSummarySub">تدعم رتب: برونزي + فضي + ذهبي | 30 يوماً فرم 24/7</div>
+            </div>
+          </div>
+          <div style="text-align: left;">
+            <div class="summary-price" id="modalSummaryPrice">$15</div>
+            <div style="font-size: 0.85rem; font-weight: 800; color: #00f2fe;" id="modalSummaryPriceIqd">22,500 د.ع</div>
+          </div>
+        </div>
+
+        <!-- SuperQi Official Payment Gateway Section -->
+        <div class="superqi-card-wrap">
+          <div class="superqi-head-row">
+            <div class="superqi-brand-box">
+              <div class="superqi-q-logo">Q</div>
+              <div>
+                <div class="superqi-brand-title" data-i18n="sq_brand_title">الدفع عبر تطبيق سوبر كي (SuperQi)</div>
+                <div class="superqi-brand-desc" data-i18n="sq_brand_desc">امسح الـ QR كود من تطبيق سوبر كي للدفع الفوري</div>
+              </div>
+            </div>
+            <span class="superqi-verified-pill" data-i18n="sq_verified_pill"><i class="fas fa-circle-check"></i> حساب موثق ومطابق</span>
+          </div>
+
+          <div class="superqi-content-grid">
+            <!-- QR Display Side -->
+            <div class="superqi-qr-side">
+              <div class="superqi-qr-frame">
+                <img src="superqi_qr.png" alt="SuperQi QR - وليد عباس" class="superqi-qr-image">
+              </div>
+              <div class="superqi-scan-tag" data-i18n="sq_scan_tag"><i class="fas fa-camera"></i> امسح وادفع بتطبيق سوبر كي</div>
+            </div>
+
+            <!-- Transfer Info Side -->
+            <div class="superqi-info-side">
+              <div class="sq-info-card">
+                <span class="sq-info-title" data-i18n="sq_owner_label">اسم صاحب الحساب المستلم:</span>
+                <span class="sq-info-name" data-i18n="sq_owner_val"><i class="fas fa-user-check text-gold"></i> وليد عباس</span>
+              </div>
+
+              <div class="sq-info-card">
+                <span class="sq-info-title" data-i18n="sq_amount_label">المبلغ المطلوب للتحويل:</span>
+                <span class="sq-info-amount" id="superqiAmountDue">22,500 دينار عراقي ($15)</span>
+              </div>
+
+              <!-- Quick Steps -->
+              <div class="superqi-steps-card">
+                <div class="sq-step-item">
+                  <span class="sq-step-num">1</span>
+                  <span data-i18n="sq_step1">افتح تطبيق <strong>سوبر كي (SuperQi)</strong> في هاتفك.</span>
+                </div>
+                <div class="sq-step-item">
+                  <span class="sq-step-num">2</span>
+                  <span data-i18n="sq_step2">اضغط على <strong>(امسح وادفع)</strong> واقرأ الباركود المقابل.</span>
+                </div>
+                <div class="sq-step-item">
+                  <span class="sq-step-num">3</span>
+                  <span data-i18n="sq_step3">تأكد من ظهور اسم <strong>(وليد عباس)</strong> وأرسل المبلغ.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buyer Input 1: Discord Username / ID -->
+        <div class="modal-form-group">
+          <label class="modal-label" for="inputDiscordUser" data-i18n="input_discord_label">
+            <i class="fab fa-discord text-discord"></i> اسم حسابك أو الآيدي في الديسكورد (Discord Username / ID): <span style="color:#ef4444;">*</span>
+          </label>
+          <div class="modal-input-wrap">
+            <input type="text" id="inputDiscordUser" class="modal-input" placeholder="مثال: walid أو آيدي حسابك..." data-i18n-placeholder="input_discord_placeholder" value="">
+          </div>
+          <div class="modal-hint" data-i18n="input_discord_hint">
+            <i class="fas fa-envelope-circle-check text-cyan"></i> سيقوم البوت بإرسال كود التفعيل وأمر التشغيل إلى خاص حسابك بالديسكورد مباشرة.
+          </div>
+        </div>
+
+        <!-- Buyer Input 2: Transaction Reference / Sender Name -->
+        <div class="modal-form-group">
+          <label class="modal-label" for="inputTxRef" data-i18n="input_tx_label">
+            <i class="fas fa-receipt text-gold"></i> رقم إشعار التحويل أو اسم حسابك في سوبر كي:
+          </label>
+          <div class="modal-input-wrap">
+            <input type="text" id="inputTxRef" class="modal-input" placeholder="مثال: رقم العملية أو اسم المحوّل في سوبر كي..." data-i18n-placeholder="input_tx_placeholder" value="">
+          </div>
+          <div class="modal-hint" data-i18n="input_tx_hint">
+            <i class="fas fa-shield-halved text-green"></i> لتأكيد المعاملة وتوثيقها في قاعدة بيانات التراخيص فوراً.
+          </div>
+        </div>
+
+        <!-- Buyer Input 3: Upload Payment Screenshot (SuperQi Receipt) -->
+        <div class="modal-form-group">
+          <label class="modal-label" for="receiptFileInput" data-i18n="receipt_upload_label">
+            <i class="fas fa-camera text-cyan"></i> لقطة شاشة لإشعار التحويل (وصل سوبر كي): <span style="font-size: 0.75rem; color: #00ff88;">(موصى به لتسريع القبول ⚡)</span>
+          </label>
+          <div class="receipt-upload-box" id="receiptUploadBox" onclick="document.getElementById('receiptFileInput').click()">
+            <input type="file" id="receiptFileInput" accept="image/*" style="display: none;" onchange="handleReceiptFileSelect(event)">
+            <div class="receipt-drop-content" id="receiptDropContent">
+              <i class="fas fa-cloud-arrow-up receipt-upload-icon"></i>
+              <div class="receipt-upload-text" data-i18n="receipt_drop_text">اضغط هنا لاختيار صورة الوصل أو اسحبها إلى هنا</div>
+              <div class="receipt-upload-sub" data-i18n="receipt_drop_sub">يدعم: PNG, JPG, JPEG (صورة واضحة لإشعار التحويل في هاتفك)</div>
+            </div>
+            <div class="receipt-preview-wrap" id="receiptPreviewWrap" style="display: none;">
+              <img id="receiptPreviewImg" src="" alt="وصل التحويل" class="receipt-preview-img">
+              <div class="receipt-preview-overlay">
+                <button type="button" class="btn-remove-receipt" onclick="removeReceiptImage(event)" data-i18n="receipt_remove_btn">
+                  <i class="fas fa-trash-can"></i> حذف وتغيير الصورة
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-hint" data-i18n="receipt_hint">
+            <i class="fas fa-eye text-gold"></i> سيتم إرفاق صورة الوصل مباشرة في رسالة التحقق الخاصة بالمالك في ديسكورد لمطابقتها فوراً.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn-submit-purchase" id="btnSubmitPurchase" onclick="submitPurchaseLicense()" data-i18n="btn_submit_purchase">
+          <i class="fas fa-paper-plane"></i> إرسال تفاصيل التحويل للتحقق واعتماد الكود 🚀
+        </button>
+      </div>
+
+      <!-- Pending Verification View (Shown after submitting) -->
+      <div class="modal-body-content purchase-pending-view" id="modalPendingView" style="display: none;">
+        <div class="pending-clock-badge">
+          <i class="fas fa-hourglass-half fa-spin"></i>
+        </div>
+        <div class="pending-modal-title" data-i18n="pending_title">⏳ تم إرسال طلبك وجاري التحقق من الحوالة!</div>
+        <div class="pending-modal-subtitle" data-i18n="pending_subtitle">
+          قام النظام بإشعار صاحب الحساب <strong>(وليد عباس)</strong> لمطابقة التحويل في محفظة سوبر كي.
+        </div>
+
+        <div class="pending-details-card">
+          <div class="pending-detail-row">
+            <span class="detail-label" data-i18n="pending_order_id_lbl"><i class="fas fa-hashtag text-cyan"></i> رقم الطلب (Order ID):</span>
+            <span class="detail-val highlight-req" id="pendingReqId">REQ-000000</span>
+          </div>
+          <div class="pending-detail-row">
+            <span class="detail-label" data-i18n="pending_plan_lbl"><i class="fas fa-box text-gold"></i> الباقة المطلوبة:</span>
+            <span class="detail-val" id="pendingPlanName">الباقة الماسية (شهر كامل)</span>
+          </div>
+          <div class="pending-detail-row">
+            <span class="detail-label" data-i18n="pending_amount_lbl"><i class="fas fa-money-bill-wave text-green"></i> المبلغ المستحق:</span>
+            <span class="detail-val" id="pendingAmount">22,500 د.ع ($15)</span>
+          </div>
+          <div class="pending-detail-row">
+            <span class="detail-label" data-i18n="pending_discord_lbl"><i class="fab fa-discord text-discord"></i> حساب الديسكورد:</span>
+            <span class="detail-val" id="pendingDiscordUser">@mandalawi</span>
+          </div>
+          <div class="pending-detail-row">
+            <span class="detail-label" data-i18n="pending_tx_lbl"><i class="fas fa-receipt text-gold"></i> اسم المحوّل / الإشعار:</span>
+            <span class="detail-val" id="pendingTxRef">وليد عباس</span>
+          </div>
+          <div class="pending-detail-row">
+            <span class="detail-label" data-i18n="pending_receipt_lbl"><i class="fas fa-camera text-cyan"></i> لقطة شاشة الوصل:</span>
+            <span class="detail-val" id="pendingHasScreenshot" data-i18n="pending_receipt_attached">مرفقة مع الطلب 📸</span>
+          </div>
+        </div>
+
+        <div class="pending-instructions-box">
+          <div class="instructions-header" data-i18n="pending_how_title">
+            <i class="fas fa-shield-halved text-cyan"></i> <strong>كيف ستستلم كود التفعيل؟</strong>
+          </div>
+          <p data-i18n="pending_how_desc">
+            بمجرد أن يطابق المشرف وصول المبلغ عبر هاتفه (خلال دقائق معدودة)، سيقوم البوت <strong>بإرسال كود التفعيل وأمر التشغيل تلقائياً إلى خاص حسابك في ديسكورد (DM)</strong> دون أي تدخل منك!
+          </p>
+        </div>
+
+        <div class="modal-actions-row">
+          <a href="https://discord.gg/h22X8tMwtA" target="_blank" class="btn-modal-action btn-modal-discord" style="text-decoration: none;" data-i18n="btn_go_discord">
+            <i class="fab fa-discord"></i> التوجه لسيرفر الديسكورد
+          </a>
+          <button class="btn-modal-action btn-modal-done" onclick="closePurchaseModal()" data-i18n="btn_modal_close">
+            <i class="fas fa-circle-check"></i> حسناً، إغلاق
+          </button>
+        </div>
+      </div>
+
+      <!-- Success Result View (Hidden Initially) -->
+      <div class="modal-body-content purchase-success-view" id="modalSuccessView">
+        <div class="success-check-badge">
+          <i class="fas fa-check"></i>
+        </div>
+        <div class="success-modal-title" data-i18n="success_title">🎉 تم إصدار وتوثيق ترخيصك بنجاح!</div>
+        <div class="dm-status-indicator success" id="modalDmStatusIndicator">
+          <i class="fas fa-envelope-open-text"></i>
+          <span id="modalDmStatusText" data-i18n="success_dm_text">تم إرسال كود التفعيل وأمر السلاش إلى خاص حسابك بالديسكورد!</span>
+        </div>
+
+        <!-- Key Display Box -->
+        <div class="modal-key-display-box">
+          <div class="key-box-label">
+            <span data-i18n="success_key_lbl"><i class="fas fa-key text-gold"></i> كود الترخيص الخاص بك (License Key):</span>
+            <span style="font-size: 0.75rem; color: #00ff88;" data-i18n="success_key_valid">صالح للاستخدام 🟢</span>
+          </div>
+          <div class="key-code-big" id="resultLicenseKey">GOAT-DIA-XXXX-YYYY</div>
+          <button class="btn-modal-action btn-modal-done" style="width: 100%;" onclick="copyResultLicenseKey()" data-i18n="btn_copy_key">
+            <i class="fas fa-copy"></i> نسخ كود الترخيص فقط
+          </button>
+        </div>
+
+        <!-- 1-Click Redeem Command Box -->
+        <div class="command-box-copy">
+          <div style="font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 4px;" data-i18n="success_redeem_title">
+            <i class="fas fa-terminal text-cyan"></i> أمر التفعيل الجاهز للديسكورد (Redeem Command):
+          </div>
+          <div style="font-size: 0.78rem; color: #94a3b8;" data-i18n="success_redeem_sub">
+            انسخ هذا الأمر والصقه مباشرة في روم الأوامر بسيرفر <strong>𝑮.𝑶.𝑨.𝑻 ™</strong> لتنشيط باقتك:
+          </div>
+          <div class="cmd-string-box" id="resultRedeemCmd">/redeem code:GOAT-DIA-XXXX-YYYY</div>
+          <button class="btn-modal-action" style="background: linear-gradient(135deg, #00f2fe, #4facfe); color: #080a10; width: 100%; font-weight: 800;" onclick="copyResultRedeemCommand()" data-i18n="btn_copy_redeem_cmd">
+            <i class="fas fa-copy"></i> نسخ أمر التفعيل المكتمل ولصقه بالديسكورد
+          </button>
+        </div>
+
+        <!-- Actions Row -->
+        <div class="modal-actions-row">
+          <a href="https://discord.gg/h22X8tMwtA" target="_blank" class="btn-modal-action btn-modal-discord" style="text-decoration: none;" data-i18n="btn_open_discord">
+            <i class="fab fa-discord"></i> فتح سيرفر الديسكورد
+          </a>
+          <button class="btn-modal-action btn-modal-done" onclick="closePurchaseModal()" data-i18n="btn_done_close">
+            <i class="fas fa-circle-check"></i> تم، إغلاق
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Translations / Internationalization Script -->
+  <script src="translations.js?v=2.6.2"></script>
+
+  <!-- Audio Synthesis & Logic Script -->
+  <script src="app.js?v=2.6.2"></script>
+</body>
+
+</html>

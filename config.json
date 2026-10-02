@@ -1,0 +1,48 @@
+{
+  "server": {
+    "host": "play.example-server.net",
+    "port": 25565,
+    "version": false
+  },
+  "account": {
+    "username": "MineFarmer_Bot",
+    "auth": "offline",
+    "password": "MySecretPassword123"
+  },
+  "modules": {
+    "antiAfk": {
+      "enabled": true,
+      "intervalSeconds": 30,
+      "actions": ["look", "sneak", "jump"]
+    },
+    "autoAttack": {
+      "enabled": true,
+      "intervalMs": 700,
+      "radius": 3.8
+    },
+    "autoEat": {
+      "enabled": true,
+      "minFoodLevel": 14
+    },
+    "autoChest": {
+      "enabled": true,
+      "depositWhenSlotsLeft": 3,
+      "chestRadius": 4
+    },
+    "autoReconnect": {
+      "enabled": true,
+      "delaySeconds": 15
+    },
+    "discord": {
+      "enabled": true,
+      "token": "YOUR_DISCORD_BOT_TOKEN_HERE",
+      "prefix": "!",
+      "webhookUrl": "https://discord.com/api/webhooks/YOUR_WEBHOOK_URL",
+      "username": "Goat AFK Rewards",
+      "avatarUrl": "https://files.catbox.moe/nck6mk.png",
+      "notifyOnJoin": true,
+      "notifyOnLoot": true,
+      "notifyOnDisconnect": true
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="22" height="15" style="border-radius: 3px; display: inline-block; vertical-align: middle; box-shadow: 0 0 2px rgba(0,0,0,0.5);">
+  <rect width="900" height="200" fill="#ce1126"/>
+  <rect y="200" width="900" height="200" fill="#ffffff"/>
+  <rect y="400" width="900" height="200" fill="#000000"/>
+  <!-- Kufic Takbir -->
+  <text x="450" y="340" fill="#007a3d" font-family="'Cairo', sans-serif" font-weight="900" font-size="82" text-anchor="middle" letter-spacing="4">الله ★ أكبر</text>
+</svg>
