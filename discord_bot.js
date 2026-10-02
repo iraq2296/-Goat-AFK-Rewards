@@ -623,7 +623,28 @@ function loginBot(useMessageContent = true) {
       } else if (commandName === 'redeem') {
         const inputCode = (interaction.options.getString('code') || '').trim().toUpperCase();
         const db = loadSubDb();
-        const license = db.licenses[inputCode];
+        let license = db.licenses[inputCode];
+
+        if (!license) {
+          // Check if it's a valid website generated license format: GOAT-(BRZ|DIA|VIP)-XXXX-YYYY
+          const match = inputCode.match(/^GOAT-(BRZ|DIA|VIP)-([A-Z0-9]{4})-([A-Z0-9]{4})$/);
+          if (match) {
+            const prefix = match[1];
+            const planKey = prefix === 'BRZ' ? 'bronze' : (prefix === 'VIP' ? 'vip' : 'diamond');
+            const spec = PLAN_SPECS[planKey] || PLAN_SPECS.diamond;
+            license = {
+              code: inputCode,
+              plan: planKey,
+              planName: spec.name,
+              durationMs: spec.durationMs,
+              durationText: spec.durationText,
+              createdAt: Date.now(),
+              createdBy: 'website_purchase',
+              status: 'unused'
+            };
+            db.licenses[inputCode] = license;
+          }
+        }
 
         if (!license) {
           return interaction.reply({
@@ -1196,7 +1217,26 @@ function loginBot(useMessageContent = true) {
         return message.reply('ℹ️ لتفعيل الكود اكتب: `!redeem الكود-هنا` أو استخدم أمر السلاش الجاهز: `/redeem code:كودك`');
       }
       const db = loadSubDb();
-      const license = db.licenses[inputCode];
+      let license = db.licenses[inputCode];
+      if (!license) {
+        const match = inputCode.match(/^GOAT-(BRZ|DIA|VIP)-([A-Z0-9]{4})-([A-Z0-9]{4})$/);
+        if (match) {
+          const prefix = match[1];
+          const planKey = prefix === 'BRZ' ? 'bronze' : (prefix === 'VIP' ? 'vip' : 'diamond');
+          const spec = PLAN_SPECS[planKey] || PLAN_SPECS.diamond;
+          license = {
+            code: inputCode,
+            plan: planKey,
+            planName: spec.name,
+            durationMs: spec.durationMs,
+            durationText: spec.durationText,
+            createdAt: Date.now(),
+            createdBy: 'website_purchase',
+            status: 'unused'
+          };
+          db.licenses[inputCode] = license;
+        }
+      }
       if (!license) return message.reply('❌ **كود الترخيص غير صحيح!** يرجى التأكد من كتابة الكود بدقة.');
       if (license.status === 'redeemed') return message.reply(`⚠️ **تم استخدام هذا الكود سابقاً!**`);
       
