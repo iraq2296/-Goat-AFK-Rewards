@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2.6.2">
+  <link rel="stylesheet" href="style.css?v=2.7.5">
 </head>
 
 <body>
@@ -302,76 +302,9 @@
             <div class="cmd-card-desc" data-i18n="cmd_farm_desc">
               <strong>أمر تشغيل وتخصيص البوت في سيرفرك:</strong> يقوم بإدخال البوت فوراً إلى السيرفر بحسابك، ويتمركز في منطقة الأمان (Safe Zone)، ويبدأ الفرم وحمايتك من الطرد، وتصلك رسائل تفعيل الاشتراك وبدء الخمول بالخاص (DM)!
             </div>
-
-            <!-- Parameters Grid Box (Interactive Live Generator) -->
-            <div class="cmd-params-container">
-              <div class="cmd-params-head">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                  <i class="fas fa-sliders text-gold"></i>
-                  <span data-i18n="cmd_farm_guide">املأ معلوماتك هنا ليتولد أمر التشغيل تلقائياً وتنسخه فوراً:</span>
-                </div>
-                <span class="live-gen-pill">
-                  <span class="pulse-dot green" style="width: 8px; height: 8px;"></span>
-                  <span data-i18n="cmd_redeem_live">توليد تلقائي فوري (Live)</span>
-                </span>
-              </div>
-              <div class="cmd-params-grid">
-                <!-- Param 1: Server IP -->
-                <div class="param-box">
-                  <div class="param-box-top">
-                    <span class="param-name-badge" dir="ltr">server:</span>
-                    <i class="fas fa-globe text-cyan"></i>
-                  </div>
-                  <input type="text" id="cmdInputServer" class="param-input" placeholder="مثال: play.skyblock.net" data-i18n-placeholder="param_server_placeholder" value="play.skyblock.net" oninput="updateLiveFarmCommand()">
-                  <div class="param-box-desc" data-i18n="param_server_desc">آيبي السيرفر المطلوب الفرم فيه</div>
-                </div>
-
-                <!-- Param 2: Minecraft IGN -->
-                <div class="param-box">
-                  <div class="param-box-top">
-                    <span class="param-name-badge" dir="ltr">username:</span>
-                    <i class="fas fa-user-astronaut text-green"></i>
-                  </div>
-                  <input type="text" id="cmdInputUsername" class="param-input" placeholder="اسم حسابك بماينكرافت" data-i18n-placeholder="param_user_placeholder" value="MyPlayer" oninput="updateLiveFarmCommand()">
-                  <div class="param-box-desc" data-i18n="param_user_desc">اسم حسابك في اللعبة (IGN)</div>
-                </div>
-
-                <!-- Param 3: Server Port -->
-                <div class="param-box">
-                  <div class="param-box-top">
-                    <span class="param-name-badge" dir="ltr">port:</span>
-                    <i class="fas fa-ethernet text-gold"></i>
-                  </div>
-                  <input type="text" id="cmdInputPort" class="param-input" placeholder="25565" value="25565" oninput="updateLiveFarmCommand()">
-                  <div class="param-box-desc" data-i18n="param_port_desc">بورت السيرفر (الافتراضي: 25565)</div>
-                </div>
-
-                <!-- Param 4: Password (optional) -->
-                <div class="param-box">
-                  <div class="param-box-top">
-                    <span class="param-name-badge" dir="ltr">password:</span>
-                    <i class="fas fa-key text-red"></i>
-                  </div>
-                  <div class="param-input-wrap">
-                    <input type="password" id="cmdInputPassword" class="param-input" placeholder="كلمة المرور (إذا مكرك)" data-i18n-placeholder="param_pwd_placeholder" oninput="updateLiveFarmCommand()">
-                    <button type="button" class="pwd-toggle-btn" onclick="toggleCmdPasswordVisibility()" title="إظهار/إخفاء كلمة المرور">
-                      <i class="fas fa-eye" id="cmdPwdEyeIcon"></i>
-                    </button>
-                  </div>
-                  <div class="param-box-desc" data-i18n="param_pwd_desc">اختياري: لتسجيل الدخول <code dir="ltr">/login</code></div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Live Copy Bar -->
-            <div class="cmd-copy-bar featured-bar">
-              <div class="cmd-copy-code-wrap">
-                <span class="cmd-terminal-prompt"><i class="fab fa-discord"></i></span>
-                <code class="cmd-copy-code" id="liveFarmStartCmd" dir="ltr">/farm_start server:play.skyblock.net username:MyPlayer port:25565</code>
-              </div>
-              <button class="cmd-copy-btn btn-featured" id="btnCopyLiveFarmCmd" onclick="copyLiveFarmCommand()" data-i18n="cmd_farm_copy_btn">
-                <i class="fas fa-copy"></i> نسخ الأمر المكتمل ولصقه في ديسكورد
-              </button>
+            <div style="margin-top: 14px; font-size: 0.82rem; color: #94a3b8; display: flex; align-items: center; gap: 8px; background: rgba(0, 0, 0, 0.4); padding: 10px 14px; border-radius: 8px; border: 1px dashed rgba(251, 191, 36, 0.35);">
+              <i class="fas fa-lock text-gold"></i>
+              <span>متاح حصرياً للمشتركين. تظهر أداة إدخال معلومات السيرفر وتوليد الأمر بنقرة زر تلقائياً فور إتمام الاشتراك.</span>
             </div>
           </div>
 
@@ -991,6 +924,40 @@
           </button>
         </div>
 
+        <!-- 1-Click /farm_start Command Generator for Subscribers -->
+        <div class="command-box-copy" style="margin-top: 14px; border-color: rgba(251, 191, 36, 0.4); background: rgba(0, 0, 0, 0.35);">
+          <div style="font-size: 0.82rem; font-weight: 700; color: #fbbf24; margin-bottom: 4px;">
+            <i class="fas fa-bolt text-gold"></i> تجهيز أمر تشغيل البوت في سيرفرك (/farm_start):
+          </div>
+          <div style="font-size: 0.76rem; color: #94a3b8; margin-bottom: 8px;">
+            املأ معلومات سيرفرك الخاص لتجهيز أمر التشغيل المباشر بنقرة زر:
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 8px;">
+            <div class="param-box" style="padding: 6px 8px;">
+              <span class="param-name-badge" dir="ltr" style="font-size: 0.72rem; color: #00f2fe;">server:</span>
+              <input type="text" id="cmdInputServer" class="param-input" placeholder="آيبي سيرفرك" value="" oninput="updateLiveFarmCommand()" style="font-size: 0.8rem; padding: 4px 6px;">
+            </div>
+            <div class="param-box" style="padding: 6px 8px;">
+              <span class="param-name-badge" dir="ltr" style="font-size: 0.72rem; color: #00ff88;">username:</span>
+              <input type="text" id="cmdInputUsername" class="param-input" placeholder="اسمك باللعبة" value="" oninput="updateLiveFarmCommand()" style="font-size: 0.8rem; padding: 4px 6px;">
+            </div>
+            <div class="param-box" style="padding: 6px 8px;">
+              <span class="param-name-badge" dir="ltr" style="font-size: 0.72rem; color: #fbbf24;">port:</span>
+              <input type="text" id="cmdInputPort" class="param-input" placeholder="25565" value="25565" oninput="updateLiveFarmCommand()" style="font-size: 0.8rem; padding: 4px 6px;">
+            </div>
+            <div class="param-box" style="padding: 6px 8px;">
+              <span class="param-name-badge" dir="ltr" style="font-size: 0.72rem; color: #ff5555;">password:</span>
+              <input type="password" id="cmdInputPassword" class="param-input" placeholder="إذا مكرك" oninput="updateLiveFarmCommand()" style="font-size: 0.8rem; padding: 4px 6px;">
+            </div>
+          </div>
+          <div class="cmd-string-box" id="liveFarmStartCmd" dir="ltr" style="font-size: 0.78rem; color: #6ee7b7; margin-bottom: 8px;">
+            /farm_start server:myserver.net username:MyPlayer port:25565
+          </div>
+          <button class="btn-modal-action btn-featured" id="btnCopyLiveFarmCmd" onclick="copyLiveFarmCommand()" style="background: linear-gradient(135deg, #fbbf24, #d97706); color: #080a10; width: 100%; font-weight: 800;">
+            <i class="fas fa-copy"></i> نسخ أمر التشغيل المكتمل ولصقه في ديسكورد
+          </button>
+        </div>
+
         <!-- Actions Row -->
         <div class="modal-actions-row">
           <a href="https://discord.gg/h22X8tMwtA" target="_blank" class="btn-modal-action btn-modal-discord" style="text-decoration: none;" data-i18n="btn_open_discord">
@@ -1008,10 +975,10 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- Translations / Internationalization Script -->
-  <script src="translations.js?v=2.6.2"></script>
+  <script src="translations.js?v=2.7.5"></script>
 
   <!-- Audio Synthesis & Logic Script -->
-  <script src="app.js?v=2.6.2"></script>
+  <script src="app.js?v=2.7.5"></script>
 </body>
 
 </html>
