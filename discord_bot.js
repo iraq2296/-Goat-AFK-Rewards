@@ -17,6 +17,7 @@ const {
   ActivityType,
   AttachmentBuilder
 } = require('discord.js');
+const mineflayer = require('mineflayer');
 
 // Load .env if present
 const envPath = path.join(__dirname, '.env');
@@ -169,6 +170,135 @@ ${code}
     )
     .setThumbnail(AVATAR_URL)
     .setFooter({ text: `${BOT_NAME} • كود ترخيص موثق`, iconURL: AVATAR_URL });
+}
+
+// ==========================================
+// 0.1 Multi-Tenant Minecraft Bot Manager
+// ==========================================
+const activeFarmBots = {};
+
+function stopMinecraftFarmBot(userId) {
+  if (activeFarmBots[userId]) {
+    try {
+      const session = activeFarmBots[userId];
+      clearInterval(session.antiAfkTimer);
+      clearInterval(session.attackTimer);
+      if (session.bot) {
+        session.bot.removeAllListeners();
+        session.bot.quit();
+      }
+    } catch (e) {}
+    delete activeFarmBots[userId];
+    return true;
+  }
+  return false;
+}
+
+function launchMinecraftFarmBot(userId, opts, user) {
+  stopMinecraftFarmBot(userId);
+
+  const { server, port, username, password, plan } = opts;
+  try {
+    const mcBot = mineflayer.createBot({
+      host: server,
+      port: port || 25565,
+      username: username,
+      auth: 'offline',
+      version: false
+    });
+
+    const sessionObj = {
+      bot: mcBot,
+      server,
+      port,
+      username,
+      startTime: Date.now(),
+      plan,
+      antiAfkTimer: null,
+      attackTimer: null,
+      isOnline: false
+    };
+
+    activeFarmBots[userId] = sessionObj;
+
+    mcBot.on('login', () => {
+      sessionObj.isOnline = true;
+      console.log(`  🟢 [Minecraft Bot] ${username} connected to ${server}:${port} for user: ${user ? user.tag : userId}`);
+      if (user) {
+        user.send(`🟢 **متصل الآن!** دخل بوت الفرم **${username}** إلى سيرفرك (\`${server}:${port}\`) بنجاح!`).catch(() => {});
+      }
+    });
+
+    mcBot.on('spawn', () => {
+      console.log(`  🎮 [Minecraft Bot] ${username} spawned in world on ${server}`);
+
+      // Auto-register / Auto-login if password was provided
+      if (password) {
+        setTimeout(() => {
+          try { mcBot.chat(`/register ${password} ${password}`); } catch (e) {}
+          setTimeout(() => {
+            try { mcBot.chat(`/login ${password}`); } catch (e) {}
+          }, 1200);
+        }, 2000);
+      }
+
+      // 1. Anti-AFK
+      sessionObj.antiAfkTimer = setInterval(() => {
+        if (!mcBot || !mcBot.entity) return;
+        try {
+          const yaw = mcBot.entity.yaw + (Math.random() - 0.5) * 0.8;
+          const pitch = Math.max(-1.2, Math.min(1.2, mcBot.entity.pitch + (Math.random() - 0.5) * 0.4));
+          mcBot.look(yaw, pitch, true);
+          mcBot.setControlState('sneak', true);
+          setTimeout(() => {
+            mcBot.setControlState('jump', true);
+            setTimeout(() => {
+              mcBot.setControlState('jump', false);
+              mcBot.setControlState('sneak', false);
+            }, 300);
+          }, 350);
+        } catch (e) {}
+      }, 25000);
+
+      // 2. Auto-Attack (if diamond or vip)
+      sessionObj.attackTimer = setInterval(() => {
+        if (!mcBot || !mcBot.entity) return;
+        try {
+          const entity = mcBot.nearestEntity((e) => {
+            if (e.type !== 'mob' && e.type !== 'player') return false;
+            if (e.id === mcBot.entity.id) return false;
+            return mcBot.entity.position.distanceTo(e.position) <= 3.8;
+          });
+          if (entity) {
+            mcBot.attack(entity);
+          }
+        } catch (e) {}
+      }, 750);
+    });
+
+    mcBot.on('kicked', (reason) => {
+      console.log(`  ⚠️ [Minecraft Bot Kicked] ${username} from ${server}:`, reason);
+      if (user) {
+        user.send(`⚠️ تم طرد بوت الفرم الخاص بك من السيرفر (\`${server}\`).`).catch(() => {});
+      }
+      stopMinecraftFarmBot(userId);
+    });
+
+    mcBot.on('error', (err) => {
+      console.log(`  ❌ [Minecraft Bot Error] for ${username} on ${server}:`, err.message);
+      if (user) {
+        user.send(`❌ تعذر اتصال البوت بالسيرفر \`${server}:${port}\` (تأكد من صحة الآيبي والبورت وأن السيرفر أونلاين ومكرك Offline Mode).`).catch(() => {});
+      }
+    });
+
+    mcBot.on('end', () => {
+      console.log(`  🔌 [Minecraft Bot Disconnected] ${username} from ${server}`);
+      stopMinecraftFarmBot(userId);
+    });
+
+  } catch (err) {
+    console.error(`  ❌ [Minecraft Bot Launch Error]:`, err.message);
+  }
 }
 
 // ==========================================
@@ -721,6 +851,9 @@ function loginBot(useMessageContent = true) {
 
         await interaction.reply({ embeds: [sessionEmbed] });
 
+        // 🚀 0. Launch dedicated Minecraft Farm Bot for this subscriber
+        launchMinecraftFarmBot(interaction.user.id, { server, port, username, password, plan: sub.plan }, interaction.user);
+
         // 📩 1. Send Subscription Confirmation DM
         const subEmbed = getSubscriptionDMEmbed({
           username,
@@ -745,9 +878,10 @@ function loginBot(useMessageContent = true) {
         }, 1500);
 
       } else if (commandName === 'farm_stop') {
-        if (!botClient.userSessions[interaction.user.id]) {
+        if (!botClient.userSessions[interaction.user.id] && !activeFarmBots[interaction.user.id]) {
           return interaction.reply({ content: '❌ ليس لديك أي جلسة بوت نشطة حالياً. لتشغيل البوت اكتب `/farm_start`!', ephemeral: true });
         }
+        stopMinecraftFarmBot(interaction.user.id);
         delete botClient.userSessions[interaction.user.id];
         await interaction.reply({
           embeds: [
