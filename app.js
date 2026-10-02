@@ -1114,6 +1114,9 @@ function setLanguage(lang, playSfx = true) {
   if (btnAr) btnAr.classList.toggle('active', lang === 'ar');
   if (btnEn) btnEn.classList.toggle('active', lang === 'en');
 
+  const qpayLangSelect = document.getElementById('qpayLangSelect');
+  if (qpayLangSelect) qpayLangSelect.value = lang;
+
   // Resolve dictionary robustly (window.I18N or global I18N)
   const i18nSource = (typeof window !== 'undefined' && window.I18N)
     ? window.I18N
@@ -1288,10 +1291,16 @@ function openPurchaseModal(planKey) {
 
   if (modal) modal.classList.add('active');
   sfx.playChestSound();
+  switchPaymentMethod('qpay');
 
   setTimeout(() => {
-    const input = document.getElementById('inputDiscordUser');
-    if (input) input.focus();
+    const qpayDiscord = document.getElementById('qpayDiscordUser');
+    const oldDiscord = document.getElementById('inputDiscordUser');
+    if (qpayDiscord && oldDiscord && oldDiscord.value && !qpayDiscord.value) {
+      qpayDiscord.value = oldDiscord.value;
+    }
+    const cardInput = document.getElementById('qpayCardName');
+    if (cardInput) cardInput.focus();
   }, 100);
 }
 
@@ -1342,7 +1351,224 @@ function changeSelectedPurchasePlan(planKey, playSfx = true) {
     iconEl.innerHTML = data.iconHtml;
   }
 
+  // Update Q Pay Gateway Card Elements
+  const qpayAmountEl = document.getElementById('qpayAmountText');
+  const btnQpayTextEl = document.getElementById('btnQpaySubmitText');
+  const qpayDetailPlanEl = document.getElementById('qpayDetailPlan');
+
+  if (qpayAmountEl) qpayAmountEl.textContent = data.priceIqd;
+  if (btnQpayTextEl) {
+    btnQpayTextEl.textContent = `Pay ${data.priceIqd}`;
+  }
+  if (qpayDetailPlanEl) qpayDetailPlanEl.textContent = data.title;
+
   if (playSfx) sfx.playItemPop();
+}
+
+let currentPaymentMethod = 'qpay';
+
+function switchPaymentMethod(method) {
+  currentPaymentMethod = method;
+  const tabQpay = document.getElementById('tabMethodQpay');
+  const tabSuperqi = document.getElementById('tabMethodSuperqi');
+  const viewQpay = document.getElementById('qpayViewSection');
+  const viewSuperqi = document.getElementById('superqiViewSection');
+
+  if (method === 'qpay') {
+    if (tabQpay) tabQpay.classList.add('active');
+    if (tabSuperqi) tabSuperqi.classList.remove('active');
+    if (viewQpay) viewQpay.style.display = 'block';
+    if (viewSuperqi) viewSuperqi.style.display = 'none';
+  } else {
+    if (tabQpay) tabQpay.classList.remove('active');
+    if (tabSuperqi) tabSuperqi.classList.add('active');
+    if (viewQpay) viewQpay.style.display = 'none';
+    if (viewSuperqi) viewSuperqi.style.display = 'block';
+  }
+  sfx.playItemPop();
+}
+
+function toggleQpayOrderDetails() {
+  const details = document.getElementById('qpayOrderDetails');
+  const expandBtn = document.getElementById('btnQpayExpand');
+  if (!details) return;
+  const isHidden = details.style.display === 'none' || !details.style.display;
+  details.style.display = isHidden ? 'block' : 'none';
+  if (expandBtn) {
+    if (isHidden) expandBtn.classList.add('open');
+    else expandBtn.classList.remove('open');
+  }
+}
+
+function formatQpayCardNumber(input) {
+  let val = input.value.replace(/\D/g, '');
+  if (val.length > 16) val = val.substring(0, 16);
+  
+  // Format in groups of 4 with space
+  const parts = [];
+  for (let i = 0; i < val.length; i += 4) {
+    parts.push(val.substring(i, i + 4));
+  }
+  input.value = parts.join(' ');
+
+  // Live Card Brand Detection
+  const brandIcon = document.getElementById('qpayBrandIcon');
+  if (brandIcon) {
+    if (val.startsWith('4')) {
+      brandIcon.innerHTML = '<span style="font-weight:900; font-style:italic; color:#1a1f71; font-size:1.1rem; line-height:1;">VISA</span>';
+    } else if (/^(5[1-5]|2[2-7])/.test(val)) {
+      brandIcon.innerHTML = `
+        <div style="position:relative; width:26px; height:16px;">
+          <div style="width:16px; height:16px; border-radius:50%; background:#eb001b; position:absolute; left:0;"></div>
+          <div style="width:16px; height:16px; border-radius:50%; background:#f79e1b; position:absolute; right:0; opacity:0.92; mix-blend-mode:multiply;"></div>
+        </div>`;
+    } else if (/^(5081|6037|9860|6274|5892)/.test(val)) {
+      brandIcon.innerHTML = '<span class="qpay-mini-badge" style="width:20px; height:20px;">Q</span>';
+    } else {
+      brandIcon.innerHTML = '<i class="fas fa-credit-card" style="color:#94a3b8;"></i>';
+    }
+  }
+
+  // Visual button feedback
+  const btn = document.getElementById('btnQpaySubmit');
+  if (btn) {
+    if (val.length >= 16) {
+      btn.style.background = '#0f172a';
+      btn.style.color = '#ffffff';
+    }
+  }
+}
+
+function formatQpayExpiry(input) {
+  let val = input.value.replace(/\D/g, '');
+  if (val.length > 4) val = val.substring(0, 4);
+  if (val.length >= 2) {
+    input.value = val.substring(0, 2) + '/' + val.substring(2, 4);
+  } else {
+    input.value = val;
+  }
+}
+
+function formatQpayCvc(input) {
+  input.value = input.value.replace(/\D/g, '').substring(0, 4);
+}
+
+function toggleQpayLanguage(lang) {
+  setLanguage(lang);
+  const qpayLangSelect = document.getElementById('qpayLangSelect');
+  if (qpayLangSelect) qpayLangSelect.value = lang;
+}
+
+async function processQpayPayment() {
+  const discordInput = document.getElementById('qpayDiscordUser');
+  const cardNameInput = document.getElementById('qpayCardName');
+  const cardNumberInput = document.getElementById('qpayCardNumber');
+  const cvcInput = document.getElementById('qpayCvc');
+  const expireInput = document.getElementById('qpayExpire');
+
+  const discordUser = discordInput ? discordInput.value.trim() : '';
+  const cardName = cardNameInput ? cardNameInput.value.trim() : '';
+  const cardNumber = cardNumberInput ? cardNumberInput.value.replace(/\s+/g, '') : '';
+  const cvc = cvcInput ? cvcInput.value.trim() : '';
+  const expire = expireInput ? expireInput.value.trim() : '';
+
+  if (!discordUser) {
+    const msg = (currentLang === 'en')
+      ? '⚠️ Please enter your Discord username or ID to activate your subscription!'
+      : '⚠️ يرجى إدخال اسم حسابك أو آيدي الديسكورد لتوثيق وتفعيل الاشتراك!';
+    showToast(msg, 'info');
+    if (discordInput) discordInput.focus();
+    return;
+  }
+
+  if (!cardNumber || cardNumber.length < 15) {
+    const msg = (currentLang === 'en')
+      ? '⚠️ Please enter a valid 16-digit card number!'
+      : '⚠️ يرجى إدخال رقم بطاقة صحيح مكون من 16 رقماً!';
+    showToast(msg, 'warning');
+    if (cardNumberInput) cardNumberInput.focus();
+    return;
+  }
+
+  if (!expire || !expire.includes('/')) {
+    const msg = (currentLang === 'en')
+      ? '⚠️ Please enter card expiration date (MM/YY)!'
+      : '⚠️ يرجى إدخال تاريخ انتهاء البطاقة بالشكل (MM/YY)!';
+    showToast(msg, 'warning');
+    if (expireInput) expireInput.focus();
+    return;
+  }
+
+  if (!cvc || cvc.length < 3) {
+    const msg = (currentLang === 'en')
+      ? '⚠️ Please enter your 3-digit card security code (CVC)!'
+      : '⚠️ يرجى إدخال رمز الأمان CVC المكون من 3 أرقام خلف البطاقة!';
+    showToast(msg, 'warning');
+    if (cvcInput) cvcInput.focus();
+    return;
+  }
+
+  const btn = document.getElementById('btnQpaySubmit');
+  const originalHtml = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = (currentLang === 'en')
+      ? '<i class="fas fa-spinner fa-spin"></i> Processing Qi 3D Secure Verification...'
+      : '<i class="fas fa-spinner fa-spin"></i> جاري الاتصال بنظام Qi 3D Secure والتحقق...';
+  }
+
+  // Realistic smooth 3D Secure processing simulation
+  await new Promise(r => setTimeout(r, 750));
+
+  const prefixMap = { bronze: 'GOAT-BRZ', diamond: 'GOAT-DIA', vip: 'GOAT-VIP' };
+  const prefix = prefixMap[selectedPurchasePlan] || 'GOAT-DIA';
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let p1 = '', p2 = '';
+  for (let i = 0; i < 4; i++) p1 += chars.charAt(Math.floor(Math.random() * chars.length));
+  for (let i = 0; i < 4; i++) p2 += chars.charAt(Math.floor(Math.random() * chars.length));
+  const generatedCode = `${prefix}-${p1}-${p2}`;
+
+  sfx.playLevelUp();
+  setTimeout(() => sfx.playDiscordPing(), 300);
+
+  const keyEl = document.getElementById('resultLicenseKey');
+  const cmdEl = document.getElementById('resultRedeemCmd');
+  const dmStatusText = document.getElementById('modalDmStatusText');
+  const dmIndicator = document.getElementById('modalDmStatusIndicator');
+  const userInputEl = document.getElementById('cmdInputUsername');
+
+  if (keyEl) keyEl.textContent = generatedCode;
+  if (cmdEl) cmdEl.textContent = `/redeem code:${generatedCode}`;
+  if (userInputEl && discordUser) userInputEl.value = discordUser;
+
+  updateLiveFarmCommand();
+
+  if (dmIndicator && dmStatusText) {
+    dmIndicator.className = 'dm-status-indicator success';
+    dmStatusText.textContent = (currentLang === 'en')
+      ? `🎉 Card payment authorized via Q Pay! Copy your code and farm command below.`
+      : `🎉 تم قبول ودفع العملية بنجاح عبر بوابة Q Pay! انسخ كود التفعيل وأمر التشغيل أدناه.`;
+  }
+
+  const checkoutView = document.getElementById('modalCheckoutView');
+  const pendingView = document.getElementById('modalPendingView');
+  const successView = document.getElementById('modalSuccessView');
+  if (checkoutView) checkoutView.style.display = 'none';
+  if (pendingView) pendingView.style.display = 'none';
+  if (successView) {
+    successView.style.display = 'block';
+    successView.classList.add('active');
+  }
+
+  const codeToast = (currentLang === 'en')
+    ? `🎉 Payment Successful! License Key: ${generatedCode}`
+    : `🎉 تم الدفع والتوثيق بنجاح! كودك: ${generatedCode}`;
+  showToast(codeToast, 'success');
+
+  if (btn) {
+    btn.disabled = false;
+    btn.innerHTML = originalHtml;
+  }
 }
 
 async function submitPurchaseLicense() {

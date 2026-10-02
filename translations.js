@@ -242,6 +242,24 @@ var I18N = {
     receipt_hint: '<i class="fas fa-eye text-gold"></i> سيتم إرفاق صورة الوصل مباشرة في رسالة التحقق الخاصة بالمالك في ديسكورد لمطابقتها فوراً.',
     btn_submit_purchase: '<i class="fas fa-paper-plane"></i> إرسال تفاصيل التحويل للتحقق واعتماد الكود 🚀',
 
+    // Q Pay Card Gateway Translations (Arabic)
+    qpay_tab_card: '💳 بوابة Q Pay (كي كارد / ماستر / فيزا)',
+    qpay_tab_qr: '📱 تطبيق سوبر كي (مسح الـ QR)',
+    qpay_going_to_pay: 'أنت على وشك دفع',
+    qpay_to_merchant: 'إلى',
+    qpay_merchant_name: '𝑮.𝑶.𝑨.𝑻 ™ AFK System',
+    qpay_instructions: 'أدخل بيانات بطاقتك بأمان للمتابعة وإتمام عملية الدفع.',
+    qpay_cardholder_name: 'Cardholder name (اسم حامل البطاقة)',
+    qpay_cardholder_placeholder: 'Enter the holder name',
+    qpay_card_number: 'Card number (رقم البطاقة)',
+    qpay_cvc: 'CVC',
+    qpay_card_expire: 'Card Expire (تاريخ الانتهاء)',
+    qpay_discord_user: 'اسم حسابك أو الآيدي بالديسكورد (Discord Username / ID)',
+    qpay_discord_placeholder: 'مثال: mandalawi أو 490264176535797767',
+    qpay_discord_hint: 'سيتم توثيق اشتراكك وتفعيل كود البوت لحسابك بالديسكورد فوراً.',
+    qpay_btn_pay: 'Pay',
+    qpay_stored_securely: 'All payment data is stored securely (جميع بيانات الدفع مشفرة ومحمية بأمان)',
+
     // Modal Pending View
     pending_title: '⏳ تم إرسال طلبك وجاري التحقق من الحوالة!',
     pending_subtitle: 'قام النظام بإشعار صاحب الحساب <strong>(وليد عباس)</strong> لمطابقة التحويل في محفظة سوبر كي.',
@@ -507,6 +525,24 @@ var I18N = {
     receipt_remove_btn: '<i class="fas fa-trash-can"></i> Remove & Change Image',
     receipt_hint: '<i class="fas fa-eye text-gold"></i> Your receipt screenshot will be attached directly in the admin verification message for 1-click review.',
     btn_submit_purchase: '<i class="fas fa-paper-plane"></i> Submit Transfer Details for Instant Verification 🚀',
+
+    // Q Pay Card Gateway Translations (English)
+    qpay_tab_card: '💳 Q Pay (Card / Qi / Visa / Master)',
+    qpay_tab_qr: '📱 SuperQi App (QR Code Scan)',
+    qpay_going_to_pay: 'You are going to pay',
+    qpay_to_merchant: 'to',
+    qpay_merchant_name: 'payment gateway test merchant',
+    qpay_instructions: 'Securely enter your card information to proceed with payment.',
+    qpay_cardholder_name: 'Cardholder name',
+    qpay_cardholder_placeholder: 'Enter the holder name',
+    qpay_card_number: 'Card number',
+    qpay_cvc: 'CVC',
+    qpay_card_expire: 'Card Expire',
+    qpay_discord_user: 'Discord Username / ID',
+    qpay_discord_placeholder: 'e.g. mandalawi or 490264176535797767',
+    qpay_discord_hint: 'Your license key and bot commands will be granted to this account.',
+    qpay_btn_pay: 'Pay',
+    qpay_stored_securely: 'All payment data is stored securely',
 
     // Modal Pending View
     pending_title: '⏳ Order Submitted — Verifying Payment Transfer!',

@@ -3776,5 +3776,486 @@ body {
   transition: opacity 0.15s ease-in-out;
 }
 
+/* ===================================================
+   Q Pay Payment Gateway (Qi Card / Visa / Mastercard)
+   Matches Official Qi Card Payment Form Design
+   =================================================== */
+.payment-method-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 5px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pay-method-tab {
+  background: transparent;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #94a3b8;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.pay-method-tab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.pay-method-tab.active {
+  background: #fdb913;
+  color: #080a10;
+  box-shadow: 0 4px 14px rgba(253, 185, 19, 0.35);
+}
+
+.qpay-mini-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fdb913;
+  color: #080a10;
+  font-weight: 900;
+  font-size: 0.78rem;
+  line-height: 1;
+}
+
+.pay-method-tab.active .qpay-mini-badge {
+  background: #080a10;
+  color: #fdb913;
+}
+
+/* Q Pay White Container */
+.qpay-gateway-card {
+  background: #ffffff;
+  color: #1e293b;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.qpay-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px 12px;
+  background: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.qpay-logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qpay-logo-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fdb913;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(253, 185, 19, 0.35);
+}
+
+.qpay-q-letter {
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1;
+  font-family: system-ui, -apple-system, sans-serif;
+  transform: translateY(-1px);
+}
+
+.qpay-logo-text {
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: #1e293b;
+  letter-spacing: -0.5px;
+}
+
+.qpay-lang-box {
+  display: flex;
+  align-items: center;
+}
+
+.qpay-lang-select {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #334155;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.qpay-lang-select:focus {
+  border-color: #fdb913;
+}
+
+/* Order Summary Banner with Yellow Accent Line */
+.qpay-summary-banner {
+  padding: 14px 20px;
+  background: #ffffff;
+  border-bottom: 2px solid #fdb913;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.qpay-summary-text-wrap {
+  flex: 1;
+  text-align: left;
+}
+
+[dir="rtl"] .qpay-summary-text-wrap {
+  text-align: right;
+}
+
+.qpay-summary-subtitle {
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.qpay-summary-amount-line {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.qpay-summary-amount {
+  font-weight: 800;
+  color: #0f172a;
+  margin-right: 4px;
+}
+
+[dir="rtl"] .qpay-summary-amount {
+  margin-right: 0;
+  margin-left: 4px;
+}
+
+.qpay-summary-to {
+  color: #64748b;
+  font-weight: 500;
+  margin: 0 4px;
+}
+
+.qpay-summary-merchant {
+  color: #1e293b;
+  text-decoration: underline;
+  text-decoration-color: #cbd5e1;
+  font-weight: 700;
+}
+
+.qpay-expand-btn {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.qpay-expand-btn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.qpay-expand-btn i {
+  transition: transform 0.25s ease;
+}
+
+.qpay-expand-btn.open i {
+  transform: rotate(180deg);
+}
+
+/* Collapsible Details */
+.qpay-order-details-collapsed {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 20px;
+}
+
+.qpay-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  padding: 4px 0;
+}
+
+.detail-label {
+  color: #64748b;
+}
+
+.detail-value {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* Q Pay Form Body */
+.qpay-body {
+  padding: 18px 20px 22px;
+  background: #ffffff;
+}
+
+.qpay-instructions {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+[dir="rtl"] .qpay-instructions {
+  text-align: right;
+}
+
+.qpay-form-group {
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+[dir="rtl"] .qpay-form-group {
+  text-align: right;
+}
+
+.qpay-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.qpay-info-tooltip {
+  color: #94a3b8;
+  font-size: 0.78rem;
+  cursor: help;
+}
+
+.qpay-input {
+  width: 100%;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 0.95rem;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.qpay-input:focus {
+  border-color: #fdb913;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(253, 185, 19, 0.18);
+}
+
+.qpay-input::placeholder {
+  color: #94a3b8;
+  font-size: 0.88rem;
+}
+
+.qpay-input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.qpay-input-with-icon .qpay-input {
+  padding-right: 44px;
+}
+
+[dir="rtl"] .qpay-input-with-icon .qpay-input {
+  padding-right: 14px;
+  padding-left: 44px;
+}
+
+.qpay-card-brand-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+[dir="rtl"] .qpay-card-brand-icon {
+  right: auto;
+  left: 14px;
+}
+
+.qpay-grid-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.qpay-field-hint {
+  font-size: 0.74rem;
+  color: #64748b;
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+/* Pay Button */
+.qpay-submit-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 1.02rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25);
+}
+
+.qpay-submit-btn:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.35);
+}
+
+.qpay-submit-btn:active {
+  transform: translateY(0);
+}
+
+.qpay-submit-btn:disabled {
+  background: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Trust Footer & Badges */
+.qpay-footer {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.qpay-secure-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.qpay-secure-notice i {
+  color: #10b981;
+}
+
+.qpay-card-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.qpay-footer-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #fdb913;
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.mc-badge {
+  position: relative;
+  width: 34px;
+  height: 22px;
+}
+
+.mc-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+}
+
+.mc-red {
+  background: #eb001b;
+  left: 0;
+}
+
+.mc-yellow {
+  background: #f79e1b;
+  right: 0;
+  mix-blend-mode: multiply;
+  opacity: 0.92;
+}
+
+.visa-badge .visa-text {
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 1.25rem;
+  letter-spacing: -1px;
+  color: #1a1f71;
+  line-height: 1;
+}
+
 
 

@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2.7.5">
+  <link rel="stylesheet" href="style.css?v=2.8.0">
 </head>
 
 <body>
@@ -720,115 +720,264 @@
           </div>
         </div>
 
-        <!-- SuperQi Official Payment Gateway Section -->
-        <div class="superqi-card-wrap">
-          <div class="superqi-head-row">
-            <div class="superqi-brand-box">
-              <div class="superqi-q-logo">Q</div>
-              <div>
-                <div class="superqi-brand-title" data-i18n="sq_brand_title">الدفع عبر تطبيق سوبر كي (SuperQi)</div>
-                <div class="superqi-brand-desc" data-i18n="sq_brand_desc">امسح الـ QR كود من تطبيق سوبر كي للدفع الفوري</div>
+        <!-- Payment Method Switcher Tabs -->
+        <div class="payment-method-selector">
+          <button type="button" class="pay-method-tab active" id="tabMethodQpay" onclick="switchPaymentMethod('qpay')">
+            <span class="qpay-mini-badge">Q</span>
+            <span data-i18n="qpay_tab_card">💳 بوابة Q Pay (كي كارد / ماستر / فيزا)</span>
+          </button>
+          <button type="button" class="pay-method-tab" id="tabMethodSuperqi" onclick="switchPaymentMethod('superqi')">
+            <i class="fas fa-qrcode text-cyan"></i>
+            <span data-i18n="qpay_tab_qr">📱 تطبيق سوبر كي (مسح الـ QR)</span>
+          </button>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 1. Q Pay Gateway Form View (Matches Screenshot) -->
+        <!-- ============================================== -->
+        <div class="qpay-gateway-card" id="qpayViewSection">
+          <!-- Top Q Pay Brand Row -->
+          <div class="qpay-header-row">
+            <div class="qpay-logo-wrap">
+              <div class="qpay-logo-badge">
+                <span class="qpay-q-letter">Q</span>
               </div>
+              <span class="qpay-logo-text">Pay</span>
             </div>
-            <span class="superqi-verified-pill" data-i18n="sq_verified_pill"><i class="fas fa-circle-check"></i> حساب موثق ومطابق</span>
+            <div class="qpay-lang-box">
+              <select id="qpayLangSelect" class="qpay-lang-select" onchange="toggleQpayLanguage(this.value)">
+                <option value="en">English ▾</option>
+                <option value="ar" selected>العربية ▾</option>
+              </select>
+            </div>
           </div>
 
-          <div class="superqi-content-grid">
-            <!-- QR Display Side -->
-            <div class="superqi-qr-side">
-              <div class="superqi-qr-frame">
-                <img src="superqi_qr.png" alt="SuperQi QR - وليد عباس" class="superqi-qr-image">
+          <!-- Order Summary Banner with yellow accent line -->
+          <div class="qpay-summary-banner">
+            <div class="qpay-summary-text-wrap">
+              <div class="qpay-summary-subtitle" id="qpayGoingToPayText" data-i18n="qpay_going_to_pay">أنت على وشك دفع</div>
+              <div class="qpay-summary-amount-line">
+                <span class="qpay-summary-amount" id="qpayAmountText">22,500 IQD</span>
+                <span class="qpay-summary-to" id="qpayToText" data-i18n="qpay_to_merchant">إلى</span>
+                <a href="javascript:void(0)" class="qpay-summary-merchant" id="qpayMerchantText" onclick="toggleQpayOrderDetails()">payment gateway test merchant</a>
               </div>
-              <div class="superqi-scan-tag" data-i18n="sq_scan_tag"><i class="fas fa-camera"></i> امسح وادفع بتطبيق سوبر كي</div>
+            </div>
+            <button type="button" class="qpay-expand-btn" id="btnQpayExpand" onclick="toggleQpayOrderDetails()" title="تفاصيل المعاملة">
+              <i class="fas fa-chevron-down" id="qpayChevron"></i>
+            </button>
+          </div>
+
+          <!-- Collapsible Order Details -->
+          <div class="qpay-order-details-collapsed" id="qpayOrderDetails" style="display: none;">
+            <div class="qpay-detail-row">
+              <span class="detail-label">Service:</span>
+              <span class="detail-value">Minecraft AFK Auto-Farm Bot (24/7)</span>
+            </div>
+            <div class="qpay-detail-row">
+              <span class="detail-label">Plan Tier:</span>
+              <span class="detail-value text-cyan" id="qpayDetailPlan">Diamond Tier (30 Days)</span>
+            </div>
+            <div class="qpay-detail-row">
+              <span class="detail-label">Protection:</span>
+              <span class="detail-value text-green">Multi-Server • Auto-Reconnect • Anti-AFK Kick</span>
+            </div>
+          </div>
+
+          <!-- Q Pay Form Body -->
+          <div class="qpay-body">
+            <div class="qpay-instructions" id="qpayInstructionsText" data-i18n="qpay_instructions">
+              أدخل بيانات بطاقتك بأمان للمتابعة وإتمام عملية الدفع.
             </div>
 
-            <!-- Transfer Info Side -->
-            <div class="superqi-info-side">
-              <div class="sq-info-card">
-                <span class="sq-info-title" data-i18n="sq_owner_label">اسم صاحب الحساب المستلم:</span>
-                <span class="sq-info-name" data-i18n="sq_owner_val"><i class="fas fa-user-check text-gold"></i> وليد عباس</span>
-              </div>
+            <!-- Cardholder Name -->
+            <div class="qpay-form-group">
+              <label class="qpay-label" for="qpayCardName" id="lblCardName" data-i18n="qpay_cardholder_name">Cardholder name (اسم حامل البطاقة)</label>
+              <input type="text" id="qpayCardName" class="qpay-input" placeholder="Enter the holder name" data-i18n-placeholder="qpay_cardholder_placeholder" autocomplete="cc-name">
+            </div>
 
-              <div class="sq-info-card">
-                <span class="sq-info-title" data-i18n="sq_amount_label">المبلغ المطلوب للتحويل:</span>
-                <span class="sq-info-amount" id="superqiAmountDue">22,500 دينار عراقي ($15)</span>
-              </div>
-
-              <!-- Quick Steps -->
-              <div class="superqi-steps-card">
-                <div class="sq-step-item">
-                  <span class="sq-step-num">1</span>
-                  <span data-i18n="sq_step1">افتح تطبيق <strong>سوبر كي (SuperQi)</strong> في هاتفك.</span>
+            <!-- Card Number -->
+            <div class="qpay-form-group">
+              <label class="qpay-label" for="qpayCardNumber" id="lblCardNumber" data-i18n="qpay_card_number">Card number (رقم البطاقة)</label>
+              <div class="qpay-input-with-icon">
+                <input type="text" id="qpayCardNumber" class="qpay-input" placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatQpayCardNumber(this)" autocomplete="cc-number">
+                <div class="qpay-card-brand-icon" id="qpayBrandIcon">
+                  <i class="fas fa-credit-card"></i>
                 </div>
-                <div class="sq-step-item">
-                  <span class="sq-step-num">2</span>
-                  <span data-i18n="sq_step2">اضغط على <strong>(امسح وادفع)</strong> واقرأ الباركود المقابل.</span>
+              </div>
+            </div>
+
+            <!-- CVC & Card Expire (2 Equal Columns) -->
+            <div class="qpay-grid-row">
+              <div class="qpay-form-group">
+                <label class="qpay-label" for="qpayCvc">
+                  <span id="lblCvc" data-i18n="qpay_cvc">CVC</span>
+                  <span class="qpay-info-tooltip" title="3-digit security code on the back of your card">ⓘ</span>
+                </label>
+                <input type="password" id="qpayCvc" class="qpay-input" placeholder="000" maxlength="4" oninput="formatQpayCvc(this)" autocomplete="cc-csc">
+              </div>
+              <div class="qpay-form-group">
+                <label class="qpay-label" for="qpayExpire" id="lblExpire" data-i18n="qpay_card_expire">Card Expire (تاريخ الانتهاء)</label>
+                <input type="text" id="qpayExpire" class="qpay-input" placeholder="MM/YY" maxlength="5" oninput="formatQpayExpiry(this)" autocomplete="cc-exp">
+              </div>
+            </div>
+
+            <!-- Discord Username / ID Field (Required for bot license) -->
+            <div class="qpay-form-group">
+              <label class="qpay-label" for="qpayDiscordUser">
+                <i class="fab fa-discord" style="color: #5865F2;"></i>
+                <span id="lblDiscordUser" data-i18n="qpay_discord_user">اسم حسابك أو الآيدي بالديسكورد (Discord Username / ID)</span>
+                <span style="color:#ef4444;">*</span>
+              </label>
+              <input type="text" id="qpayDiscordUser" class="qpay-input" placeholder="مثال: mandalawi أو 490264176535797767" data-i18n-placeholder="qpay_discord_placeholder">
+              <div class="qpay-field-hint" id="hintDiscordUser" data-i18n="qpay_discord_hint">
+                سيتم توثيق اشتراكك وتفعيل كود البوت لحسابك بالديسكورد فوراً.
+              </div>
+            </div>
+
+            <!-- Pay Button -->
+            <button type="button" class="qpay-submit-btn" id="btnQpaySubmit" onclick="processQpayPayment()">
+              <span id="btnQpaySubmitText">Pay 22,500 IQD</span>
+            </button>
+
+            <!-- Trust Footer & Logos -->
+            <div class="qpay-footer">
+              <div class="qpay-secure-notice">
+                <i class="fas fa-lock"></i>
+                <span id="qpaySecureText" data-i18n="qpay_stored_securely">All payment data is stored securely (جميع بيانات الدفع مشفرة ومحمية بأمان)</span>
+              </div>
+              <div class="qpay-card-logos">
+                <!-- Qi Card Logo -->
+                <div class="qpay-footer-badge q-badge" title="Qi Card (بطاقة كي كارد)">
+                  <span class="q-badge-letter">Q</span>
                 </div>
-                <div class="sq-step-item">
-                  <span class="sq-step-num">3</span>
-                  <span data-i18n="sq_step3">تأكد من ظهور اسم <strong>(وليد عباس)</strong> وأرسل المبلغ.</span>
+                <!-- Mastercard Logo -->
+                <div class="qpay-footer-badge mc-badge" title="Mastercard">
+                  <div class="mc-circle mc-red"></div>
+                  <div class="mc-circle mc-yellow"></div>
+                </div>
+                <!-- VISA Logo -->
+                <div class="qpay-footer-badge visa-badge" title="VISA">
+                  <span class="visa-text">VISA</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Buyer Input 1: Discord Username / ID -->
-        <div class="modal-form-group">
-          <label class="modal-label" for="inputDiscordUser" data-i18n="input_discord_label">
-            <i class="fab fa-discord text-discord"></i> اسم حسابك أو الآيدي في الديسكورد (Discord Username / ID): <span style="color:#ef4444;">*</span>
-          </label>
-          <div class="modal-input-wrap">
-            <input type="text" id="inputDiscordUser" class="modal-input" placeholder="مثال: walid أو آيدي حسابك..." data-i18n-placeholder="input_discord_placeholder" value="">
-          </div>
-          <div class="modal-hint" data-i18n="input_discord_hint">
-            <i class="fas fa-envelope-circle-check text-cyan"></i> سيقوم البوت بإرسال كود التفعيل وأمر التشغيل إلى خاص حسابك بالديسكورد مباشرة.
-          </div>
-        </div>
-
-        <!-- Buyer Input 2: Transaction Reference / Sender Name -->
-        <div class="modal-form-group">
-          <label class="modal-label" for="inputTxRef" data-i18n="input_tx_label">
-            <i class="fas fa-receipt text-gold"></i> رقم إشعار التحويل أو اسم حسابك في سوبر كي:
-          </label>
-          <div class="modal-input-wrap">
-            <input type="text" id="inputTxRef" class="modal-input" placeholder="مثال: رقم العملية أو اسم المحوّل في سوبر كي..." data-i18n-placeholder="input_tx_placeholder" value="">
-          </div>
-          <div class="modal-hint" data-i18n="input_tx_hint">
-            <i class="fas fa-shield-halved text-green"></i> لتأكيد المعاملة وتوثيقها في قاعدة بيانات التراخيص فوراً.
-          </div>
-        </div>
-
-        <!-- Buyer Input 3: Upload Payment Screenshot (SuperQi Receipt) -->
-        <div class="modal-form-group">
-          <label class="modal-label" for="receiptFileInput" data-i18n="receipt_upload_label">
-            <i class="fas fa-camera text-cyan"></i> لقطة شاشة لإشعار التحويل (وصل سوبر كي): <span style="font-size: 0.75rem; color: #00ff88;">(موصى به لتسريع القبول ⚡)</span>
-          </label>
-          <div class="receipt-upload-box" id="receiptUploadBox" onclick="document.getElementById('receiptFileInput').click()">
-            <input type="file" id="receiptFileInput" accept="image/*" style="display: none;" onchange="handleReceiptFileSelect(event)">
-            <div class="receipt-drop-content" id="receiptDropContent">
-              <i class="fas fa-cloud-arrow-up receipt-upload-icon"></i>
-              <div class="receipt-upload-text" data-i18n="receipt_drop_text">اضغط هنا لاختيار صورة الوصل أو اسحبها إلى هنا</div>
-              <div class="receipt-upload-sub" data-i18n="receipt_drop_sub">يدعم: PNG, JPG, JPEG (صورة واضحة لإشعار التحويل في هاتفك)</div>
+        <!-- ============================================== -->
+        <!-- 2. SuperQi QR View (Secondary Tab)              -->
+        <!-- ============================================== -->
+        <div id="superqiViewSection" style="display: none;">
+          <!-- SuperQi Official Payment Gateway Section -->
+          <div class="superqi-card-wrap">
+            <div class="superqi-head-row">
+              <div class="superqi-brand-box">
+                <div class="superqi-q-logo">Q</div>
+                <div>
+                  <div class="superqi-brand-title" data-i18n="sq_brand_title">الدفع عبر تطبيق سوبر كي (SuperQi)</div>
+                  <div class="superqi-brand-desc" data-i18n="sq_brand_desc">امسح الـ QR كود من تطبيق سوبر كي للدفع الفوري</div>
+                </div>
+              </div>
+              <span class="superqi-verified-pill" data-i18n="sq_verified_pill"><i class="fas fa-circle-check"></i> حساب موثق ومطابق</span>
             </div>
-            <div class="receipt-preview-wrap" id="receiptPreviewWrap" style="display: none;">
-              <img id="receiptPreviewImg" src="" alt="وصل التحويل" class="receipt-preview-img">
-              <div class="receipt-preview-overlay">
-                <button type="button" class="btn-remove-receipt" onclick="removeReceiptImage(event)" data-i18n="receipt_remove_btn">
-                  <i class="fas fa-trash-can"></i> حذف وتغيير الصورة
-                </button>
+
+            <div class="superqi-content-grid">
+              <!-- QR Display Side -->
+              <div class="superqi-qr-side">
+                <div class="superqi-qr-frame">
+                  <img src="superqi_qr.png" alt="SuperQi QR - وليد عباس" class="superqi-qr-image">
+                </div>
+                <div class="superqi-scan-tag" data-i18n="sq_scan_tag"><i class="fas fa-camera"></i> امسح وادفع بتطبيق سوبر كي</div>
+              </div>
+
+              <!-- Transfer Info Side -->
+              <div class="superqi-info-side">
+                <div class="sq-info-card">
+                  <span class="sq-info-title" data-i18n="sq_owner_label">اسم صاحب الحساب المستلم:</span>
+                  <span class="sq-info-name" data-i18n="sq_owner_val"><i class="fas fa-user-check text-gold"></i> وليد عباس</span>
+                </div>
+
+                <div class="sq-info-card">
+                  <span class="sq-info-title" data-i18n="sq_amount_label">المبلغ المطلوب للتحويل:</span>
+                  <span class="sq-info-amount" id="superqiAmountDue">22,500 دينار عراقي ($15)</span>
+                </div>
+
+                <!-- Quick Steps -->
+                <div class="superqi-steps-card">
+                  <div class="sq-step-item">
+                    <span class="sq-step-num">1</span>
+                    <span data-i18n="sq_step1">افتح تطبيق <strong>سوبر كي (SuperQi)</strong> في هاتفك.</span>
+                  </div>
+                  <div class="sq-step-item">
+                    <span class="sq-step-num">2</span>
+                    <span data-i18n="sq_step2">اضغط على <strong>(امسح وادفع)</strong> واقرأ الباركود المقابل.</span>
+                  </div>
+                  <div class="sq-step-item">
+                    <span class="sq-step-num">3</span>
+                    <span data-i18n="sq_step3">تأكد من ظهور اسم <strong>(وليد عباس)</strong> وأرسل المبلغ.</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="modal-hint" data-i18n="receipt_hint">
-            <i class="fas fa-eye text-gold"></i> سيتم إرفاق صورة الوصل مباشرة في رسالة التحقق الخاصة بالمالك في ديسكورد لمطابقتها فوراً.
-          </div>
-        </div>
 
-        <!-- Submit Button -->
-        <button class="btn-submit-purchase" id="btnSubmitPurchase" onclick="submitPurchaseLicense()" data-i18n="btn_submit_purchase">
-          <i class="fas fa-paper-plane"></i> إرسال تفاصيل التحويل للتحقق واعتماد الكود 🚀
-        </button>
+          <!-- Buyer Input 1: Discord Username / ID -->
+          <div class="modal-form-group">
+            <label class="modal-label" for="inputDiscordUser" data-i18n="input_discord_label">
+              <i class="fab fa-discord text-discord"></i> اسم حسابك أو الآيدي في الديسكورد (Discord Username / ID): <span style="color:#ef4444;">*</span>
+            </label>
+            <div class="modal-input-wrap">
+              <input type="text" id="inputDiscordUser" class="modal-input" placeholder="مثال: walid أو آيدي حسابك..." data-i18n-placeholder="input_discord_placeholder" value="">
+            </div>
+            <div class="modal-hint" data-i18n="input_discord_hint">
+              <i class="fas fa-envelope-circle-check text-cyan"></i> سيقوم البوت بإرسال كود التفعيل وأمر التشغيل إلى خاص حسابك بالديسكورد مباشرة.
+            </div>
+          </div>
+
+          <!-- Buyer Input 2: Transaction Reference / Sender Name -->
+          <div class="modal-form-group">
+            <label class="modal-label" for="inputTxRef" data-i18n="input_tx_label">
+              <i class="fas fa-receipt text-gold"></i> رقم إشعار التحويل أو اسم حسابك في سوبر كي:
+            </label>
+            <div class="modal-input-wrap">
+              <input type="text" id="inputTxRef" class="modal-input" placeholder="مثال: رقم العملية أو اسم المحوّل في سوبر كي..." data-i18n-placeholder="input_tx_placeholder" value="">
+            </div>
+            <div class="modal-hint" data-i18n="input_tx_hint">
+              <i class="fas fa-shield-halved text-green"></i> لتأكيد المعاملة وتوثيقها في قاعدة بيانات التراخيص فوراً.
+            </div>
+          </div>
+
+          <!-- Buyer Input 3: Upload Payment Screenshot (SuperQi Receipt) -->
+          <div class="modal-form-group">
+            <label class="modal-label" for="receiptFileInput" data-i18n="receipt_upload_label">
+              <i class="fas fa-camera text-cyan"></i> لقطة شاشة لإشعار التحويل (وصل سوبر كي): <span style="font-size: 0.75rem; color: #00ff88;">(موصى به لتسريع القبول ⚡)</span>
+            </label>
+            <div class="receipt-upload-box" id="receiptUploadBox" onclick="document.getElementById('receiptFileInput').click()">
+              <input type="file" id="receiptFileInput" accept="image/*" style="display: none;" onchange="handleReceiptFileSelect(event)">
+              <div class="receipt-drop-content" id="receiptDropContent">
+                <i class="fas fa-cloud-arrow-up receipt-upload-icon"></i>
+                <div class="receipt-upload-text" data-i18n="receipt_drop_text">اضغط هنا لاختيار صورة الوصل أو اسحبها إلى هنا</div>
+                <div class="receipt-upload-sub" data-i18n="receipt_drop_sub">يدعم: PNG, JPG, JPEG (صورة واضحة لإشعار التحويل في هاتفك)</div>
+              </div>
+              <div class="receipt-preview-wrap" id="receiptPreviewWrap" style="display: none;">
+                <img id="receiptPreviewImg" src="" alt="وصل التحويل" class="receipt-preview-img">
+                <div class="receipt-preview-overlay">
+                  <button type="button" class="btn-remove-receipt" onclick="removeReceiptImage(event)" data-i18n="receipt_remove_btn">
+                    <i class="fas fa-trash-can"></i> حذف وتغيير الصورة
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="modal-hint" data-i18n="receipt_hint">
+              <i class="fas fa-eye text-gold"></i> سيتم إرفاق صورة الوصل مباشرة في رسالة التحقق الخاصة بالمالك في ديسكورد لمطابقتها فوراً.
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button class="btn-submit-purchase" id="btnSubmitPurchase" onclick="submitPurchaseLicense()" data-i18n="btn_submit_purchase">
+            <i class="fas fa-paper-plane"></i> إرسال تفاصيل التحويل للتحقق واعتماد الكود 🚀
+          </button>
+        </div>
       </div>
 
       <!-- Pending Verification View (Shown after submitting) -->
@@ -975,10 +1124,10 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- Translations / Internationalization Script -->
-  <script src="translations.js?v=2.7.7"></script>
+  <script src="translations.js?v=2.8.0"></script>
 
   <!-- Audio Synthesis & Logic Script -->
-  <script src="app.js?v=2.7.7"></script>
+  <script src="app.js?v=2.8.0"></script>
 </body>
 
 </html>
