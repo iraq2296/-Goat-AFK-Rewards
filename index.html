@@ -291,52 +291,6 @@
         </div>
 
         <div class="commands-list-grid">
-          <!-- Command 0: /redeem (Subscription Key Activation) -->
-          <div class="cmd-card-item featured" style="border-color: rgba(251, 191, 36, 0.5); background: linear-gradient(145deg, rgba(251, 191, 36, 0.08), rgba(8, 11, 20, 0.95)); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(251, 191, 36, 0.15);">
-            <div class="cmd-card-top">
-              <span class="cmd-name-badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border-color: rgba(251, 191, 36, 0.6);" dir="ltr"><i class="fas fa-key"></i> /redeem</span>
-              <span class="cmd-category-tag" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4);" data-i18n="cmd_redeem_tag">
-                <i class="fas fa-lock-open"></i> أمر التفعيل وتنشيط الترخيص الإجباري
-              </span>
-            </div>
-            <div class="cmd-card-desc" data-i18n="cmd_redeem_desc">
-              <strong>تنشيط وتوثيق كود الترخيص:</strong> يُكتب في روم الأوامر لتفعيل اشتراكك فور استلام الكود من الموقع أو من الخاص، وتوثيق حسابك في قاعدة البيانات المحمية ومنحك صلاحية استخدام أوامر الفرم <code dir="ltr" style="color: #00f2fe; font-weight: 800;">/farm_start</code>!
-            </div>
-
-            <!-- Parameters Grid Box for Redeem Code -->
-            <div class="cmd-params-container" style="background: rgba(0, 0, 0, 0.45); border-color: rgba(251, 191, 36, 0.3);">
-              <div class="cmd-params-head">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                  <i class="fas fa-ticket text-gold"></i>
-                  <span data-i18n="cmd_redeem_guide">ضع كود الترخيص المشفّر هنا لتجهيز أمر التفعيل بنقرة زر:</span>
-                </div>
-                <span class="live-gen-pill" style="border-color: rgba(251, 191, 36, 0.4); color: #fbbf24;">
-                  <span class="pulse-dot gold" style="width: 8px; height: 8px; background: #fbbf24;"></span>
-                  <span data-i18n="cmd_redeem_live">توليد تلقائي فوري</span>
-                </span>
-              </div>
-              <div class="param-box" style="margin-top: 10px;">
-                <div class="param-box-top">
-                  <span class="param-name-badge" dir="ltr" style="color: #fbbf24; border-color: rgba(251, 191, 36, 0.4);">code:</span>
-                  <i class="fas fa-shield-halved text-gold"></i>
-                </div>
-                <input type="text" id="cmdInputRedeemCode" class="param-input" placeholder="مثال: GOAT-DIA-A7X9-B3K2" data-i18n-placeholder="param_redeem_placeholder" value="GOAT-DIA-X79K-Q42M" oninput="updateLiveRedeemCommand()">
-                <div class="param-box-desc" data-i18n="param_redeem_desc">كود الترخيص المشفّر المستلم بالخاص أو بعد إتمام الشراء من الموقع</div>
-              </div>
-            </div>
-
-            <!-- Live Copy Bar -->
-            <div class="cmd-copy-bar featured-bar" style="border-top-color: rgba(251, 191, 36, 0.25);">
-              <div class="cmd-copy-code-wrap">
-                <span class="cmd-terminal-prompt" style="color: #fbbf24;"><i class="fas fa-key"></i></span>
-                <code class="cmd-copy-code" id="liveRedeemCmd" dir="ltr" style="color: #fde68a;">/redeem code:GOAT-DIA-X79K-Q42M</code>
-              </div>
-              <button class="cmd-copy-btn btn-featured" style="background: linear-gradient(135deg, #fbbf24, #d97706); color: #080a10;" id="btnCopyLiveRedeemCmd" onclick="copyLiveRedeemCommand()" data-i18n="cmd_redeem_copy_btn">
-                <i class="fas fa-copy"></i> نسخ أمر التفعيل ولصقه في ديسكورد
-              </button>
-            </div>
-          </div>
-
           <!-- Command 1: /farm_start (Featured Master Command) -->
           <div class="cmd-card-item featured">
             <div class="cmd-card-top">
