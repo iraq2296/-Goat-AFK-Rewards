@@ -50,7 +50,7 @@ const TOKEN = process.env.DISCORD_TOKEN || (configToken && configToken !== 'YOUR
 const PREFIX = config.modules?.discord?.prefix || '!';
 const BOT_NAME = config.modules?.discord?.username || 'Goat AFK Rewards';
 const AVATAR_URL = config.modules?.discord?.avatarUrl || 'https://files.catbox.moe/nck6mk.png'; // 24k Golden Goat Logo for Discord
-const API_PORT = process.env.PORT || config.apiPort || 3001;
+const API_PORT = process.env.PORT || process.env.SERVER_PORT || config.apiPort || 25997;
 const OWNER_DISCORD_ID = '490264176535797767'; // وليد عباس (mandalawi)
 
 console.log('===========================================================');

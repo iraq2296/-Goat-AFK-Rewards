@@ -44,5 +44,6 @@
       "notifyOnLoot": true,
       "notifyOnDisconnect": true
     }
-  }
+  },
+  "apiPort": 25997
 }
